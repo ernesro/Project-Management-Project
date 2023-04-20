@@ -19,31 +19,25 @@ import static com.example.gestionproyectos.data.dataBase.pst;
 
 public class ProjectController implements Initializable
 {
-    Project Actproject;
+    Project actProject;
+
     @FXML
     private TextArea descTb;
-
     @FXML
     private TextField codeTb;
-
     @FXML
     private TextField tltTb;
-
     @FXML
     private Label stateLb;
 
     @FXML
     private TableView projTb;
-
     @FXML
     private TableColumn <Project, String> codeColum;
-
     @FXML
     private TableColumn <Project, String> titleColum;
-
     @FXML
     private TableColumn <Project, String> descriptionColum;
-
     @FXML
     private TableColumn <Project, String> stateColum;
 
@@ -56,7 +50,7 @@ public class ProjectController implements Initializable
         dataBase.connect();
         refreshTable("SELECT * FROM proyects ORDER BY cod");
         ObservableList<Project> items = projTb.getItems();
-        Actproject = items.get(0);
+        actProject = items.get(0);
         loadTb();
         dataBase.close();
     }
@@ -65,17 +59,17 @@ public class ProjectController implements Initializable
     {
         Project selectedItem = (Project) projTb.getSelectionModel().getSelectedItem();
         if(selectedItem != null) {
-            Actproject = selectedItem;
+            actProject = selectedItem;
             loadTb();
         }
     }
 
     public void loadTb()
     {
-        codeTb.setText(Actproject.getCode());
-        descTb.setText(Actproject.getDescription());
-        tltTb.setText(Actproject.getTitle());
-        stateLb.setText(Actproject.getState());
+        codeTb.setText(actProject.getCode());
+        descTb.setText(actProject.getDescription());
+        tltTb.setText(actProject.getTitle());
+        stateLb.setText(actProject.getState());
     }
 
     public void refreshTable(String sql){
@@ -218,7 +212,7 @@ public class ProjectController implements Initializable
         refreshTable("SELECT * FROM proyects WHERE cod='"+ codeTb.getText() +"'");
         ObservableList<Project> items = projTb.getItems();
         if(!items.isEmpty()) {
-            Actproject = items.get(0);
+            actProject = items.get(0);
             loadTb();
         }
         dataBase.close();
@@ -236,7 +230,7 @@ public class ProjectController implements Initializable
     public void setStateOnHold() {stateLb.setText("on hold");}
     public void setStateCompleted() {stateLb.setText("completed");}
 
-    /*------------ ALERTs ------------*/
+    /*------------ ALERTS ------------*/
 
     public void createErrorAlert(String type){
         Alert alert = new Alert(Alert.AlertType.ERROR);

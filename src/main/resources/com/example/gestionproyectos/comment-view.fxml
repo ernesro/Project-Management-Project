@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="598.0" prefWidth="923.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionproyectos.controllers.CommentController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Comments" underline="true">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TableView fx:id="projectsTv" layoutX="301.0" layoutY="38.0" onMouseClicked="#click_ProjectView" prefHeight="208.0" prefWidth="271.0">
+        <columns>
+          <TableColumn fx:id="pCode" prefWidth="75.0" text="Code" />
+          <TableColumn fx:id="pTitle" prefWidth="205.20001220703125" text="Title" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tasksTv" layoutX="599.0" layoutY="41.0" onMouseClicked="#click_TaskView" prefHeight="208.0" prefWidth="302.0">
+         <columns>
+            <TableColumn fx:id="tCode" prefWidth="75.0" text="Code" />
+            <TableColumn fx:id="tTitle" prefWidth="167.20001220703125" text="Title" />
+            <TableColumn fx:id="tProject" prefWidth="55.20001220703125" text="Project" />
+         </columns>
+      </TableView>
+      <TableView fx:id="commentsTv" layoutX="301.0" layoutY="307.0" onMouseClicked="#click_CommentView" prefHeight="277.0" prefWidth="598.0">
+         <columns>
+            <TableColumn fx:id="cCode" prefWidth="75.0" text="Code" />
+            <TableColumn fx:id="cTask" prefWidth="75.0" text="Task" />
+            <TableColumn fx:id="cContent" prefWidth="446.20001220703125" text="Content" />
+         </columns>
+      </TableView>
+      <Label layoutX="14.0" layoutY="69.0" text="Code" />
+      <Label layoutX="14.0" layoutY="99.0" text="Task" />
+      <Label layoutX="16.0" layoutY="136.0" text="Content" />
+      <TextArea fx:id="contentTb" layoutX="16.0" layoutY="163.0" prefHeight="200.0" prefWidth="271.0" />
+      <TextField fx:id="taskTb" layoutX="55.0" layoutY="95.0" prefHeight="26.0" prefWidth="230.0" />
+      <TextField fx:id="codeTb" layoutX="55.0" layoutY="64.0" prefHeight="26.0" prefWidth="230.0" />
+      <Label layoutX="399.0" layoutY="14.0" text="Projects Table" />
+      <Button layoutX="16.0" layoutY="389.0" mnemonicParsing="false" onAction="#addBt" prefHeight="26.0" prefWidth="62.0" text="Add" />
+      <Button layoutX="120.0" layoutY="389.0" mnemonicParsing="false" onAction="#updateBt" prefHeight="26.0" prefWidth="62.0" text="Update" />
+      <Button layoutX="120.0" layoutY="521.0" mnemonicParsing="false" onAction="#deleteComment" prefHeight="26.0" prefWidth="62.0" text="Delete" />
+      <Button layoutX="216.0" layoutY="389.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Clear" />
+      <Button layoutX="301.0" layoutY="274.0" mnemonicParsing="false" onAction="#searchCommentByCodeButton" text="Search By code" />
+      <Button layoutX="409.0" layoutY="274.0" mnemonicParsing="false" onAction="#searchTaskByCodeButton" text="Search By task" />
+      <Button layoutX="814.0" layoutY="274.0" mnemonicParsing="false" onAction="#allComments" prefHeight="26.0" prefWidth="85.0" text="Show all" />
+      <Label layoutX="713.0" layoutY="14.0" text="Tasks Table" />
+      <Label layoutX="600.0" layoutY="278.0" text="CommentsTable" />
+   </children>
+</AnchorPane>

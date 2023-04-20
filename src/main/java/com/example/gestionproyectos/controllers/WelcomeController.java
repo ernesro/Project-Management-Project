@@ -13,6 +13,8 @@ public class WelcomeController
     Button projBt;
     @FXML
     Button tasksBt;
+    @FXML
+    Button commBt;
 
     public void projectsBt_Click() throws IOException {
         WindowFXML window = new WindowFXML("project-view.fxml");
@@ -21,6 +23,11 @@ public class WelcomeController
 
     public void tasksBt_Click(ActionEvent actionEvent) throws IOException {
         WindowFXML window = new WindowFXML("tasks-view.fxml");
+        window.show();
+    }
+
+    public void commentsBt_Click(ActionEvent actionEvent) throws IOException {
+        WindowFXML window = new WindowFXML("comment-view.fxml");
         window.show();
     }
 }

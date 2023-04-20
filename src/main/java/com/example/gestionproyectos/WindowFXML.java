@@ -14,6 +14,7 @@ public class WindowFXML extends Stage
         Parent root = loader.load();
         setTitle("PROJECT MANAGEMENT");
         Scene scene = new Scene(root, 1100, 600);
+        setResizable(false);
         setScene(scene);
     }
 }
