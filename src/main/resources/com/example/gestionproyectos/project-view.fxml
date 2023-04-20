@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionproyectos.controllers.ProjectController">
+   <children>
+      <TableView fx:id="projTb" layoutX="424.0" layoutY="55.0" onMouseClicked="#loadTbFromSelectedTableView" prefHeight="489.0" prefWidth="576.0">
+        <columns>
+          <TableColumn fx:id="codeColum" prefWidth="81.19998168945312" text="Code" />
+          <TableColumn fx:id="titleColum" minWidth="0.0" prefWidth="173.80001831054688" text="Title" />
+            <TableColumn fx:id="stateColum" prefWidth="134.20001220703125" text="State" />
+            <TableColumn fx:id="descriptionColum" prefWidth="182.79998779296875" text="Description" />
+        </columns>
+      </TableView>
+      <Label layoutX="27.0" layoutY="59.0" text="Code" />
+      <Label layoutX="29.0" layoutY="101.0" text="Title" />
+      <Label layoutX="27.0" layoutY="113.0" />
+      <Label layoutX="25.0" layoutY="143.0" text="Description" />
+      <Label layoutX="27.0" layoutY="291.0" text="State" />
+      <TextArea fx:id="descTb" layoutX="131.0" layoutY="143.0" prefHeight="125.0" prefWidth="238.0" />
+      <TextField fx:id="codeTb" layoutX="131.0" layoutY="54.0" prefHeight="26.0" prefWidth="238.0" />
+      <TextField fx:id="tltTb" layoutX="131.0" layoutY="97.0" prefHeight="26.0" prefWidth="238.0" />
+      <Button fx:id="allBt" layoutX="874.0" layoutY="561.0" mnemonicParsing="false" onAction="#allButton" prefHeight="26.0" prefWidth="114.0" text="See All" />
+      <Button fx:id="searchBt" layoutX="414.0" layoutY="561.0" mnemonicParsing="false" onAction="#searchByCodeButton" text="Search by Code" />
+      <Button fx:id="deltBt" layoutX="186.0" layoutY="517.0" mnemonicParsing="false" onAction="#deleteButton" prefHeight="26.0" prefWidth="127.0" text="Delete" />
+      <Button fx:id="addBt" layoutX="129.0" layoutY="397.0" mnemonicParsing="false" onAction="#addButton" prefHeight="26.0" prefWidth="114.0" text="Add Proyect" />
+      <Button fx:id="onHBt" layoutX="131.0" layoutY="320.0" mnemonicParsing="false" onAction="#setStateOnHold" prefHeight="26.0" prefWidth="61.0" text="on hold" />
+      <Button fx:id="inPBt" layoutX="206.0" layoutY="320.0" mnemonicParsing="false" onAction="#setStateInProgress" prefHeight="26.0" prefWidth="76.0" text="in progress" />
+      <Button fx:id="compBt" layoutX="293.0" layoutY="320.0" mnemonicParsing="false" onAction="#setStateCompleted" prefHeight="26.0" prefWidth="76.0" text="completed" />
+      <Label layoutX="27.0" layoutY="325.0" text="Actual state" />
+      <Button fx:id="updtBt" layoutX="257.0" layoutY="397.0" mnemonicParsing="false" onAction="#updateButton" prefHeight="26.0" prefWidth="114.0" text="Update" />
+      <Label fx:id="stateLb" layoutX="131.0" layoutY="291.0" />
+      <Label fx:id="errorLb" layoutX="27.0" layoutY="14.0" />
+      <Button fx:id="ClearBt" layoutX="201.0" layoutY="434.0" mnemonicParsing="false" onAction="#clearButton" prefHeight="26.0" prefWidth="99.0" text="Clear" />
+   </children>
+</AnchorPane>
