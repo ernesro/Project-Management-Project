@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionproyectos.controllers.ProjectController">
    <children>
@@ -33,5 +34,10 @@
       <Label fx:id="stateLb" layoutX="131.0" layoutY="291.0" />
       <Label fx:id="errorLb" layoutX="27.0" layoutY="14.0" />
       <Button fx:id="ClearBt" layoutX="201.0" layoutY="434.0" mnemonicParsing="false" onAction="#clearButton" prefHeight="26.0" prefWidth="99.0" text="Clear" />
+      <Label layoutX="27.0" layoutY="23.0" text="Proyects" underline="true">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

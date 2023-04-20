@@ -1,14 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.gestionproyectos.TasksView"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="592.0" prefWidth="1038.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionproyectos.controllers.TaskController">
+   <children>
+      <TableView fx:id="projetTv" layoutX="299.0" layoutY="54.0" onMouseClicked="#click_ProjectView" prefHeight="530.0" prefWidth="290.0">
+        <columns>
+          <TableColumn fx:id="pCodeColum" prefWidth="92.20001220703125" text="Code" />
+            <TableColumn fx:id="pTitleColum" prefWidth="195.0" text="Title" />
+        </columns>
+      </TableView>
+      <TableView fx:id="taskTv" layoutX="597.0" layoutY="54.0" onMouseClicked="#click_TaskView" prefHeight="530.0" prefWidth="426.0">
+         <columns>
+            <TableColumn fx:id="tCodeColum" prefWidth="56.60003662109375" text="Code" />
+            <TableColumn fx:id="tTitleColum" prefWidth="133.79998779296875" text="Title" />
+            <TableColumn fx:id="tDescColum" prefWidth="141.79998779296875" text="Description" />
+            <TableColumn fx:id="tStateColum" prefWidth="94.0" text="State" />
+         </columns>
+      </TableView>
+      <TextField fx:id="codeTb" layoutX="86.0" layoutY="54.0" prefHeight="26.0" prefWidth="203.0" />
+      <TextField fx:id="tltTb" layoutX="86.0" layoutY="91.0" prefHeight="26.0" prefWidth="203.0" />
+      <TextArea fx:id="descTb" layoutX="86.0" layoutY="142.0" prefHeight="114.0" prefWidth="203.0" />
+      <Label layoutX="14.0" layoutY="142.0" text="Description" />
+      <Label layoutX="14.0" layoutY="274.0" text="State" />
+      <Label layoutX="14.0" layoutY="96.0" text="Title" />
+      <Label layoutX="14.0" layoutY="58.0" text="Code" />
+      <TextField fx:id="prjtTb" layoutX="70.0" layoutY="343.0" prefHeight="26.0" prefWidth="219.0" />
+      <Label layoutX="10.0" layoutY="348.0" text="Project" />
+      <Button layoutX="299.0" layoutY="22.0" mnemonicParsing="false" onAction="#searchProjectByCodeButton" text="Seach by code" />
+      <Button layoutX="522.0" layoutY="22.0" mnemonicParsing="false" onAction="#allProjectsButton" prefHeight="26.0" prefWidth="67.0" text="Show All" />
+      <Button layoutX="597.0" layoutY="22.0" mnemonicParsing="false" onAction="#searchTaskByCodeButton" text="Seach by code" />
+      <Button layoutX="955.0" layoutY="22.0" mnemonicParsing="false" onAction="#allTasksButton" prefHeight="26.0" prefWidth="67.0" text="Show All" />
+      <Label fx:id="stateLb" layoutX="72.0" layoutY="274.0" text="State" />
+      <Button fx:id="holdBt" layoutX="56.0" layoutY="305.0" mnemonicParsing="false" onAction="#setStateOnHold" prefHeight="26.0" prefWidth="75.0" text="not started" />
+      <Button fx:id="completedBt" layoutX="216.0" layoutY="306.0" mnemonicParsing="false" onAction="#setStateCompleted" text="completed" />
+      <Button fx:id="progressBt" layoutX="137.0" layoutY="306.0" mnemonicParsing="false" onAction="#setStateInProgress" text="in progress" />
+      <Button layoutX="73.0" layoutY="389.0" mnemonicParsing="false" onAction="#addTask" prefHeight="26.0" prefWidth="93.0" text="Add Task" />
+      <Button layoutX="194.0" layoutY="388.0" mnemonicParsing="false" onAction="#updateTask" prefHeight="26.0" prefWidth="94.0" text="Update" />
+      <Button layoutX="71.0" layoutY="558.0" mnemonicParsing="false" onAction="#deleteTask" prefHeight="26.0" prefWidth="93.0" text="Delete" />
+      <Button layoutX="70.0" layoutY="460.0" mnemonicParsing="false" onAction="#clearButton" prefHeight="26.0" prefWidth="94.0" text="CLear" />
+      <Label layoutX="12.0" layoutY="16.0" text="Tasks" textFill="#030303" underline="true">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <Label layoutX="414.0" layoutY="7.0" text="Projects Table" />
+      <Label layoutX="782.0" layoutY="13.0" text="Tasks Table" />
+   </children>
 </AnchorPane>

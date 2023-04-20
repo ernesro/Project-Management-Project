@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionproyectos.controllers.WelcomeController">
    <children>
-      <Button fx:id="tasksBt" layoutX="14.0" layoutY="359.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="138.0" text="Tasks" />
+      <Button fx:id="tasksBt" layoutX="14.0" layoutY="359.0" mnemonicParsing="false" onAction="#tasksBt_Click" prefHeight="26.0" prefWidth="138.0" text="Tasks" />
       <Button fx:id="commBt" layoutX="171.0" layoutY="359.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" text="Comments" />
       <Button fx:id="asigBt" layoutX="447.0" layoutY="359.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="138.0" text="Assign Tasks" />
       <Button fx:id="teamsBt" layoutX="307.0" layoutY="359.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="123.0" text="Teams" />
