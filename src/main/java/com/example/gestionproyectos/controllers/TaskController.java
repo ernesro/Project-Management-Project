@@ -61,18 +61,19 @@ public class TaskController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         descTb.setWrapText(true);
-        dataBase.connect();
+        if (dataBase.connect()) {
+            refreshProjectTable("SELECT * FROM proyects ORDER BY cod");
+            ObservableList<Project> pItems = projetTv.getItems();
+            actProject = pItems.get(0);
 
-        refreshProjectTable("SELECT * FROM proyects ORDER BY cod");
-        ObservableList<Project> pItems = projetTv.getItems();
-        actProject = pItems.get(0);
+            refreshTaskTable("SELECT * FROM tasks ORDER BY cod");
+            ObservableList<Task> tItems = taskTv.getItems();
+            actTask = tItems.get(0);
 
-        refreshTaskTable("SELECT * FROM tasks ORDER BY cod");
-        ObservableList<Task> tItems = taskTv.getItems();
-        actTask = tItems.get(0);
-
-        loadTb();
-        dataBase.close();
+            loadTb();
+            dataBase.close();
+        }
+        else createErrorAlert("MySql Connection");
     }
 
     public void refreshProjectTable(String sql)

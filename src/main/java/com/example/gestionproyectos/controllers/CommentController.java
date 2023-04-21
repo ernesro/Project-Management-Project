@@ -63,10 +63,8 @@ public class CommentController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        contentTb.setWrapText(true);
         if(dataBase.connect()) {
-            contentTb.setWrapText(true);
-            dataBase.connect();
-
             refreshProjectsTable("SELECT * FROM proyects ORDER BY cod");
             ObservableList<Project> pItems = projectsTv.getItems();
             actProject = pItems.get(0);

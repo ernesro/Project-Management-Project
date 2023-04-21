@@ -44,15 +44,16 @@ public class ProjectController implements Initializable
     /*-------------- LOAD DATA --------------*/
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         descTb.setWrapText(true);
-        dataBase.connect();
-        refreshTable("SELECT * FROM proyects ORDER BY cod");
-        ObservableList<Project> items = projTb.getItems();
-        actProject = items.get(0);
-        loadTb();
-        dataBase.close();
+        if (dataBase.connect()) {
+            refreshTable("SELECT * FROM proyects ORDER BY cod");
+            ObservableList<Project> items = projTb.getItems();
+            actProject = items.get(0);
+            loadTb();
+            dataBase.close();
+        }
+        else createErrorAlert("MySql Connection");
     }
 
     public void loadTbFromSelectedTableView()

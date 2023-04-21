@@ -54,8 +54,6 @@ public class TeamController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(dataBase.connect()) {
-            //dataBase.connect();
-
             refreshProjectsTable("SELECT * FROM proyects ORDER BY cod");
             ObservableList<Project> pItems = projectsTv.getItems();
             actProject = pItems.get(0);
