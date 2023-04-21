@@ -63,23 +63,26 @@ public class CommentController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        contentTb.setWrapText(true);
-        dataBase.connect();
+        if(dataBase.connect()) {
+            contentTb.setWrapText(true);
+            dataBase.connect();
 
-        refreshProjectsTable("SELECT * FROM proyects ORDER BY cod");
-        ObservableList<Project> pItems = projectsTv.getItems();
-        actProject = pItems.get(0);
+            refreshProjectsTable("SELECT * FROM proyects ORDER BY cod");
+            ObservableList<Project> pItems = projectsTv.getItems();
+            actProject = pItems.get(0);
 
-        refreshTasksTable("SELECT * FROM tasks ORDER BY cod");
-        ObservableList<Task> tItems = tasksTv.getItems();
-        actTask = tItems.get(0);
+            refreshTasksTable("SELECT * FROM tasks ORDER BY cod");
+            ObservableList<Task> tItems = tasksTv.getItems();
+            actTask = tItems.get(0);
 
-        refreshCommentsTable("SELECT * FROM comments ORDER BY cod");
-        ObservableList<Comment> cItems = commentsTv.getItems();
-        actComment = cItems.get(0);
+            refreshCommentsTable("SELECT * FROM comments ORDER BY cod");
+            ObservableList<Comment> cItems = commentsTv.getItems();
+            actComment = cItems.get(0);
 
-        loadTb();
-        dataBase.close();
+            loadTb();
+            dataBase.close();
+        }
+        else createErrorAlert("MySql Connection");
     }
 
     private void refreshCommentsTable(String sql) {
@@ -265,7 +268,7 @@ public class CommentController implements Initializable
 
         try{
             pst = con.prepareStatement(sql);
-            pst.setString(4, code);
+            pst.setString(2, code);
             pst.setString(1, cont);
 
             int status = pst.executeUpdate();

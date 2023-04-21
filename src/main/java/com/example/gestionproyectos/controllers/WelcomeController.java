@@ -30,4 +30,9 @@ public class WelcomeController
         WindowFXML window = new WindowFXML("comment-view.fxml");
         window.show();
     }
+
+    public void teamBt_Click(ActionEvent actionEvent) throws IOException {
+        WindowFXML window = new WindowFXML("team-view.fxml");
+        window.show();
+    }
 }

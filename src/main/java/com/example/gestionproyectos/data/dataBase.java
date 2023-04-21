@@ -12,13 +12,15 @@ public class dataBase {
     public static Connection con = null;
     public static PreparedStatement pst = null;
 
-    public static void connect(){
+    public static boolean connect(){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/proyectos","root","");
         } catch (Exception e){
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
+            return false;
         }
+        return true;
     }
     public static void close()
     {
