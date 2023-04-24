@@ -1,5 +1,6 @@
 package com.example.gestionproyectos.controllers;
 
+import com.example.gestionproyectos.clases.ALert;
 import com.example.gestionproyectos.clases.Project;
 import com.example.gestionproyectos.data.dataBase;
 import javafx.collections.FXCollections;
@@ -53,7 +54,7 @@ public class ProjectController implements Initializable
             loadTb();
             dataBase.close();
         }
-        else createErrorAlert("MySql Connection");
+        else ALert.createErrorAlert("MySql Connection");
     }
 
     public void loadTbFromSelectedTableView()
@@ -96,7 +97,7 @@ public class ProjectController implements Initializable
                 stateColum.setCellValueFactory(f -> f.getValue().stateProperty());
 
         } catch (Exception e){
-            createErrorAlert(type);
+            ALert.createErrorAlert(type);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
         dataBase.close();
@@ -130,16 +131,16 @@ public class ProjectController implements Initializable
             int status = pst.executeUpdate();
 
             if(status == 1){
-                createSuccesAlert(type);
+                ALert.createSuccesAlert(type);
 
                 refreshTable("SELECT * FROM proyects ORDER BY cod");
                 clearButton();
                 codeTb.requestFocus();
             } else {
-                createErrorAlert(type);
+                ALert.createErrorAlert(type);
             }
         } catch (SQLException e){
-            createErrorAlert(type);
+            ALert.createErrorAlert(type);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
         dataBase.close();
@@ -165,16 +166,16 @@ public class ProjectController implements Initializable
             int status = pst.executeUpdate();
 
             if(status == 1){
-                createSuccesAlert(type);
+                ALert.createSuccesAlert(type);
 
                 refreshTable("SELECT * FROM proyects ORDER BY cod");
                 clearButton();
                 codeTb.requestFocus();
             } else {
-                createErrorAlert(type);
+                ALert.createErrorAlert(type);
             }
         } catch (SQLException e){
-            createErrorAlert(type);
+            ALert.createErrorAlert(type);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
         dataBase.close();
@@ -192,16 +193,16 @@ public class ProjectController implements Initializable
             int status = pst.executeUpdate();
 
             if (status == 1) {
-                createSuccesAlert(type);
+                ALert.createSuccesAlert(type);
 
                 refreshTable("SELECT * FROM proyects ORDER BY cod");
                 clearButton();
                 codeTb.requestFocus();
             } else {
-                createErrorAlert(type);
+                ALert.createErrorAlert(type);
             }
         } catch (SQLException e) {
-            createErrorAlert(type);
+            ALert.createErrorAlert(type);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
         dataBase.close();
@@ -230,22 +231,4 @@ public class ProjectController implements Initializable
     public void setStateInProgress() {stateLb.setText("in progress");}
     public void setStateOnHold() {stateLb.setText("on hold");}
     public void setStateCompleted() {stateLb.setText("completed");}
-
-    /*------------ ALERTS ------------*/
-
-    public void createErrorAlert(String type){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Fail");
-        alert.setHeaderText("PROJECT MANAGEMENT");
-        alert.setContentText("Project " + type + " Failed");
-        alert.showAndWait();
-    }
-
-    public void createSuccesAlert(String type){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setHeaderText("PROJECT MANAGEMENT");
-        alert.setContentText("Project " + type + " Successfully");
-        alert.showAndWait();
-    }
 }

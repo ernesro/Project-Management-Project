@@ -94,16 +94,14 @@ CREATE TABLE `teams`
 (
   `cod` varchar(10) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `cod_proyect` varchar(10),
 
-  PRIMARY Key (`cod`),
-  CONSTRAINT `fk_teams_proyects` FOREIGN KEY (`cod_proyect`) REFERENCES `proyects` (`cod`) ON DELETE CASCADE
+  PRIMARY Key (`cod`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
- INSERT INTO `teams` (`cod`, `name`, `cod_proyect`) VALUES
- ('A', 'Team 1', 'P001'),
- ('B', 'Team 2', 'P002'),
- ('c', 'Team 3', 'P003');
+ INSERT INTO `teams` (`cod`, `name`) VALUES
+ ('A', 'Team 1'),
+ ('B', 'Team 2'),
+ ('C', 'Team 3');
 
 
 
@@ -115,17 +113,15 @@ CREATE TABLE `employees`
   `phoneNumber` varchar(9) NOT NULL,
   `address` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
-  `team` varchar(10),
 
-  PRIMARY Key (`dni`),
-  CONSTRAINT `fk_employees_team` FOREIGN KEY (`team`) REFERENCES `teams` (`cod`) ON DELETE CASCADE
+  PRIMARY Key (`dni`)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `employees` (`dni`, `name`, `lastName`, `phoneNumber`, `address`, `email`, `team`) VALUES 
-('12345678A', 'John', 'Doe', '123456789', '123 Main St', 'johndoe@email.com', 'A'),
-('87654321B', 'Jane', 'Doe', '987654321', '456 Elm St', 'janedoe@email.com', 'B'),
-('11111111C', 'Alice', 'Smith', '111111111', '789 Oak St', 'alice.smith@email.com', 'C'),
-('22222222D', 'Bob', 'Johnson', '222222222', '321 Pine St', 'bob.johnson@email.com', 'A');
+INSERT INTO `employees` (`dni`, `name`, `lastName`, `phoneNumber`, `address`, `email`) VALUES 
+('12345678A', 'John', 'Doe', '123456789', '123 Main St', 'johndoe@email.com'),
+('87654321B', 'Jane', 'Doe', '987654321', '456 Elm St', 'janedoe@email.com'),
+('11111111C', 'Alice', 'Smith', '111111111', '789 Oak St', 'alice.smith@email.com'),
+('22222222D', 'Bob', 'Johnson', '222222222', '321 Pine St', 'bob.johnson@email.com');
 
 
 
@@ -143,6 +139,43 @@ INSERT INTO `assigntask` (`dni`, `cod_task`) VALUES
 ('11111111C', '1'),
 ('11111111C', '2'),
 ('87654321B', '5');
+
+
+
+CREATE TABLE `assignteam`
+(
+  cod_team varchar(10) NOT NULL, 
+  cod_proyect varchar(10) NOT NULL,
+
+  PRIMARY Key (`cod_team`, `cod_proyect`),
+  CONSTRAINT `fk_assignTeam_team` FOREIGN KEY (`cod_team`) REFERENCES `teams` (`cod`) ON DELETE CASCADE,
+  CONSTRAINT `fk_assignTeam_Project` FOREIGN KEY (`cod_proyect`) REFERENCES `proyects` (`cod`) ON DELETE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `assignteam` (`cod_team`, `cod_proyect`) VALUES
+('A', 'P001'),
+('C', 'P001'),
+('B', 'P002');
+
+
+
+CREATE TABLE `assignemployee`
+(
+  dni varchar(10) NOT NULL, 
+  cod_team varchar(10) NOT NULL,
+
+  PRIMARY Key (`dni`, `cod_team`),
+  CONSTRAINT `fk_assignEmployees_team` FOREIGN KEY (`cod_team`) REFERENCES `teams` (`cod`) ON DELETE CASCADE,
+  CONSTRAINT `fk_assignemployess_employee` FOREIGN KEY (`dni`) REFERENCES `employees` (`dni`) ON DELETE CASCADE
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `assignemployee` (`dni`, `cod_team`) VALUES
+('11111111C', 'A'),
+('87654321B', 'A'),
+('22222222D', 'B');
+
+INSERT INTO `assignemployee` (`dni`, `cod_team`) VALUES
+('12345678A', 'A');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -35,4 +35,9 @@ public class WelcomeController
         WindowFXML window = new WindowFXML("team-view.fxml");
         window.show();
     }
+
+    public void assignTeamBt_Click(ActionEvent actionEvent) throws IOException {
+        WindowFXML window = new WindowFXML("assignTeam-view.fxml");
+        window.show();
+    }
 }

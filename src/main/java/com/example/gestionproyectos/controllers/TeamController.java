@@ -23,27 +23,15 @@ import static com.example.gestionproyectos.data.dataBase.pst;
 
 public class TeamController implements Initializable
 {
-    Project actProject;
     Team actTeam;
 
     @FXML
     private TextField nameTb;
     @FXML
     private TextField codeTb;
-    @FXML
-    private TextField projectTb;
-
-    @FXML
-    private TableView projectsTv;
-    @FXML
-    private TableColumn<Project, String> pCode;
-    @FXML
-    private TableColumn <Project, String> pTitle;
 
     @FXML
     private TableView teamsTv;
-    @FXML
-    private TableColumn <Team, String> tProject;
     @FXML
     private TableColumn <Team, String> tName;
     @FXML
@@ -54,10 +42,6 @@ public class TeamController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(dataBase.connect()) {
-            refreshProjectsTable("SELECT * FROM proyects ORDER BY cod");
-            ObservableList<Project> pItems = projectsTv.getItems();
-            actProject = pItems.get(0);
-
             refreshTeamsTable("SELECT * FROM teams ORDER BY cod");
             ObservableList<Team> tItems = teamsTv.getItems();
             actTeam = tItems.get(0);
@@ -72,7 +56,6 @@ public class TeamController implements Initializable
     {
         codeTb.setText(actTeam.getCode());
         nameTb.setText(actTeam.getName());
-        projectTb.setText(actTeam.getCod_project());
     }
 
     private void refreshTeamsTable(String sql) {
@@ -87,7 +70,6 @@ public class TeamController implements Initializable
                 Team team = new Team();
                 team.setCode(rs.getString("cod"));
                 team.setName(rs.getString("name"));
-                team.setCod_project(rs.getString("cod_proyect"));
                 teams.add(team);
             }
             teamsTv.setItems(teams);
@@ -97,7 +79,6 @@ public class TeamController implements Initializable
             }
             tCode.setCellValueFactory(f -> f.getValue().codeProperty());
             tName.setCellValueFactory(f -> f.getValue().nameProperty());
-            tProject.setCellValueFactory(f -> f.getValue().cod_projectProperty());
         } catch (Exception e){
             createErrorAlert(type);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
@@ -105,36 +86,6 @@ public class TeamController implements Initializable
         dataBase.close();
     }
 
-    private void refreshProjectsTable(String sql) {
-        dataBase.connect();
-        String type = "SEARCH";
-        ObservableList<Project> projects = FXCollections.observableArrayList();
-        try{
-            dataBase.pst = con.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-
-            while (rs.next()) {
-                Project project = new Project();
-                project.setCode(rs.getString("cod"));
-                project.setTitle(rs.getString("title"));
-                projects.add(project);
-            }
-            projectsTv.setItems(projects);
-            pCode.setCellValueFactory(f -> f.getValue().codeProperty());
-            pTitle.setCellValueFactory(f -> f.getValue().titleProperty());
-        } catch (Exception e){
-            createErrorAlert(type);
-            Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
-        }
-        dataBase.close();
-    }
-
-    public void loadTeams()
-    {
-        dataBase.connect();
-        refreshTeamsTable("SELECT * FROM teams WHERE cod_proyect='" + actProject.getCode() +"'");
-        dataBase.close();
-    }
 
     /*--------------  BUTTONS  --------------*/
 
@@ -142,29 +93,25 @@ public class TeamController implements Initializable
     {
         codeTb.setText("");
         nameTb.setText("");
-        projectTb.setText("");
     }
 
     @FXML
     public void addBt()
     {
         String type = "INSERT";
-        String sql = "INSERT INTO teams(cod, cod_proyect, name) values (?,?,?)";
+        String sql = "INSERT INTO teams(cod, name) values (?,?)";
         dataBase.connect();
         String code = codeTb.getText();
         String name = nameTb.getText();
-        String proj = projectTb.getText();
         try{
             pst = con.prepareStatement(sql);
             pst.setString(1, code);
-            pst.setString(2, proj);
-            pst.setString(3,name);
+            pst.setString(2,name);
             int status = pst.executeUpdate();
 
             if(status == 1){
                 createSuccesAlert(type);
-
-                loadTeams();
+                allTeamsButton();
                 clearBt();
                 codeTb.requestFocus();
             } else {
@@ -194,8 +141,7 @@ public class TeamController implements Initializable
 
             if(status == 1){
                 createSuccesAlert(type);
-
-                loadTeams();
+                allTeamsButton();
                 clearBt();
                 codeTb.requestFocus();
             } else {
@@ -247,35 +193,9 @@ public class TeamController implements Initializable
         dataBase.close();
     }
 
-    public void searchProjectByCodeButton()
-    {
-        dataBase.connect();
-        refreshProjectsTable("SELECT * FROM proyects WHERE cod='"+ projectTb.getText() +"'");
-        ObservableList<Project> items = projectsTv.getItems();
-        if(!items.isEmpty()) {
-            actProject = items.get(0);
-            loadTeams();
-        }
-        dataBase.close();
-    }
-
     public void allTeamsButton()
     {
         refreshTeamsTable("SELECT * FROM teams ORDER BY cod");
-    }
-    public void allProjectsButton()
-    {
-        refreshProjectsTable("SELECT * FROM proyects ORDER BY cod");
-    }
-
-    @FXML
-    public void click_ProjectView()
-    {
-        Project selectedItem = (Project) projectsTv.getSelectionModel().getSelectedItem();
-        if(selectedItem != null) {
-            actProject = selectedItem;
-            loadTeams();
-        }
     }
 
     @FXML

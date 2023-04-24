@@ -6,17 +6,10 @@
 
 <AnchorPane prefHeight="566.0" prefWidth="971.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionproyectos.controllers.TeamController">
    <children>
-      <TableView fx:id="teamsTv" layoutX="561.0" layoutY="60.0" onMouseClicked="#click_TeamView" prefHeight="494.0" prefWidth="396.0">
+      <TableView fx:id="teamsTv" layoutX="314.0" layoutY="60.0" onMouseClicked="#click_TeamView" prefHeight="494.0" prefWidth="643.0">
         <columns>
-          <TableColumn fx:id="tCode" prefWidth="75.0" text="Code" />
-          <TableColumn fx:id="tName" prefWidth="232.79998779296875" text="Name" />
-            <TableColumn fx:id="tProject" prefWidth="83.2000732421875" text="Project" />
-        </columns>
-      </TableView>
-      <TableView fx:id="projectsTv" layoutX="297.0" layoutY="60.0" onMouseClicked="#click_ProjectView" prefHeight="494.0" prefWidth="238.0">
-        <columns>
-          <TableColumn fx:id="pCode" prefWidth="82.20001220703125" text="Code" />
-          <TableColumn fx:id="pTitle" prefWidth="154.5999755859375" text="Title" />
+          <TableColumn fx:id="tCode" prefWidth="164.79998779296875" text="Code" />
+          <TableColumn fx:id="tName" prefWidth="478.39996337890625" text="Name" />
         </columns>
       </TableView>
       <TextField fx:id="codeTb" layoutX="79.0" layoutY="59.0" prefHeight="26.0" prefWidth="206.0" />
@@ -28,13 +21,8 @@
       </Label>
       <Label layoutX="22.0" layoutY="63.0" text="Code" />
       <Label layoutX="22.0" layoutY="100.0" text="Name" />
-      <Label layoutX="382.0" layoutY="5.0" text="Project table" />
-      <Label layoutX="718.0" layoutY="5.0" text="Teams table" />
-      <Label layoutX="22.0" layoutY="138.0" text="Project" />
-      <TextField fx:id="projectTb" layoutX="80.0" layoutY="134.0" prefHeight="26.0" prefWidth="205.0" />
-      <Button layoutX="297.0" layoutY="23.0" mnemonicParsing="false" onAction="#searchProjectByCodeButton" prefHeight="26.0" prefWidth="116.0" text="Search by Proyect" />
-      <Button layoutX="467.0" layoutY="23.0" mnemonicParsing="false" onAction="#allProjectsButton" prefHeight="26.0" prefWidth="72.0" text="Show All" />
-      <Button layoutX="569.0" layoutY="23.0" mnemonicParsing="false" onAction="#searchTeamByCodeButton" prefHeight="26.0" prefWidth="134.0" text="Search by code" />
+      <Label layoutX="612.0" layoutY="27.0" text="Teams table" />
+      <Button layoutX="314.0" layoutY="23.0" mnemonicParsing="false" onAction="#searchTeamByCodeButton" prefHeight="26.0" prefWidth="134.0" text="Search by code" />
       <Button layoutX="841.0" layoutY="23.0" mnemonicParsing="false" onAction="#allTeamsButton" prefHeight="26.0" prefWidth="116.0" text="Show All" />
       <Button layoutX="22.0" layoutY="188.0" mnemonicParsing="false" onAction="#addBt" prefHeight="26.0" prefWidth="72.0" text="Add Team" />
       <Button layoutX="213.0" layoutY="188.0" mnemonicParsing="false" onAction="#clearBt" prefHeight="26.0" prefWidth="72.0" text="Clear" />

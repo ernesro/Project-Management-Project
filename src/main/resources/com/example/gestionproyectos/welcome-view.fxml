@@ -10,11 +10,12 @@
       <Button fx:id="commBt" layoutX="171.0" layoutY="359.0" mnemonicParsing="false" onAction="#commentsBt_Click" prefHeight="26.0" prefWidth="115.0" text="Comments" />
       <Button fx:id="asigBt" layoutX="447.0" layoutY="359.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="138.0" text="Assign Tasks" />
       <Button fx:id="teamsBt" layoutX="307.0" layoutY="359.0" mnemonicParsing="false" onAction="#teamBt_Click" prefHeight="26.0" prefWidth="123.0" text="Teams" />
-      <Button fx:id="projBt" layoutX="91.0" layoutY="315.0" mnemonicParsing="false" onAction="#projectsBt_Click" prefHeight="26.0" prefWidth="145.0" text="Projects" />
-      <Button fx:id="emplBt" layoutX="357.0" layoutY="315.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="145.0" text="Employees" />
+      <Button fx:id="projBt" layoutX="14.0" layoutY="275.0" mnemonicParsing="false" onAction="#projectsBt_Click" prefHeight="26.0" prefWidth="145.0" text="Projects" />
+      <Button fx:id="emplBt" layoutX="430.0" layoutY="275.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="145.0" text="Employees" />
       <ImageView fitHeight="200.0" fitWidth="500.0" layoutX="56.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" translateX="65.0">
          <image>
             <Image url="@../../../../../../image/descarga.jpeg" />
          </image></ImageView>
+      <Button fx:id="asigBt1" layoutX="14.0" layoutY="317.0" mnemonicParsing="false" onAction="#assignTeamBt_Click" prefHeight="26.0" prefWidth="138.0" text="Assign Team" />
    </children>
 </AnchorPane>
