@@ -1,5 +1,6 @@
 package com.example.gestionproyectos.controllers;
 
+import com.example.gestionproyectos.clases.ALert;
 import com.example.gestionproyectos.clases.Project;
 import com.example.gestionproyectos.clases.Task;
 import com.example.gestionproyectos.data.dataBase;
@@ -21,6 +22,7 @@ import static com.example.gestionproyectos.data.dataBase.pst;
 
 public class TaskController implements Initializable
 {
+    private final String className = "Task";
     Task actTask;
     Project actProject;
     @FXML
@@ -71,14 +73,11 @@ public class TaskController implements Initializable
             actTask = tItems.get(0);
 
             loadTb();
-            dataBase.close();
         }
-        else createErrorAlert("MySql Connection");
+        else ALert.createErrorAlert("MySql Connection", className);
     }
 
-    public void refreshProjectTable(String sql)
-    {
-        dataBase.connect();
+    public void refreshProjectTable(String sql) {
         String type = "SEARCH";
         ObservableList<Project> projects = FXCollections.observableArrayList();
         try{
@@ -95,15 +94,12 @@ public class TaskController implements Initializable
             pCodeColum.setCellValueFactory(f -> f.getValue().codeProperty());
             pTitleColum.setCellValueFactory(f -> f.getValue().titleProperty());
         } catch (Exception e){
-            createErrorAlert(type);
+            ALert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
-    public void refreshTaskTable(String sql)
-    {
-        dataBase.connect();
+    public void refreshTaskTable(String sql) {
         String type = "SEARCH";
         ObservableList<Task> tasks = FXCollections.observableArrayList();
         try{
@@ -123,19 +119,18 @@ public class TaskController implements Initializable
             if(tasks != null)
                 actTask = tasks.get(0);
             loadTb();
+
             tCodeColum.setCellValueFactory(f -> f.getValue().codeProperty());
             tTitleColum.setCellValueFactory(f -> f.getValue().titleProperty());
             tDescColum.setCellValueFactory(f -> f.getValue().descriptionProperty());
             tStateColum.setCellValueFactory(f -> f.getValue().stateProperty());
         } catch (Exception e){
-            createErrorAlert(type);
+            ALert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
-    public void loadTb()
-    {
+    public void loadTb() {
         codeTb.setText(actTask.getCode());
         descTb.setText(actTask.getDescription());
         tltTb.setText(actTask.getTitle());
@@ -143,24 +138,17 @@ public class TaskController implements Initializable
         stateLb.setText(actTask.getState());
     }
 
-    public void loadTasks()
-    {
-        dataBase.connect();
+    public void loadTasks() {
         refreshTaskTable("SELECT * FROM tasks WHERE cod_proyect='" + actProject.getCode() +"'");
-        dataBase.close();
     }
 
-    public void loadProjects()
-    {
-        dataBase.connect();
+    public void loadProjects() {
         refreshProjectTable("SELECT * FROM proyects WHERE cod='" + actTask.getProject() +"'");
-        dataBase.close();
     }
 
     /*-----------   BUTTONS   -----------*/
 
-    public void clearButton()
-    {
+    public void clearButton() {
         codeTb.setText("");
         descTb.setText("");
         tltTb.setText("");
@@ -169,11 +157,10 @@ public class TaskController implements Initializable
     }
 
     @FXML
-    public void addTask()
-    {
+    public void addTask() {
         String type = "INSERT";
         String sql = "INSERT INTO tasks(cod, title, cod_proyect, description, state) values (?,?,?,?,?)";
-        dataBase.connect();
+
         String code = codeTb.getText();
         String title = tltTb.getText();
         String desc = descTb.getText();
@@ -189,26 +176,24 @@ public class TaskController implements Initializable
             int status = pst.executeUpdate();
 
             if(status == 1){
-                createSuccesAlert(type);
+                ALert.createSuccesAlert(type, className);
 
                 loadTasks();
                 clearButton();
                 codeTb.requestFocus();
             } else {
-                createErrorAlert(type);
+                ALert.createErrorAlert(type, className);
             }
         } catch (SQLException e){
-            createErrorAlert(type);
+            ALert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
     @FXML
     public void updateTask(){
         String type = "UPDATE";
         String sql = "UPDATE tasks SET title=?, description=?, state=? WHERE cod=?";
-        dataBase.connect();
 
         String code = codeTb.getText();
         String title = tltTb.getText();
@@ -224,26 +209,23 @@ public class TaskController implements Initializable
             int status = pst.executeUpdate();
 
             if(status == 1){
-                createSuccesAlert(type);
+                ALert.createSuccesAlert(type, className);
 
                 loadTasks();
                 clearButton();
                 codeTb.requestFocus();
             } else {
-                createErrorAlert(type);
+                ALert.createErrorAlert(type, className);
             }
         } catch (SQLException e){
-            createErrorAlert(type);
+            ALert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
-    public void deleteTask()
-    {
+    public void deleteTask() {
         String type = "DELETE";
         String sql = "DELETE FROM tasks WHERE cod=?";
-        dataBase.connect();
 
         String code = codeTb.getText();
         try {
@@ -252,25 +234,23 @@ public class TaskController implements Initializable
             int status = pst.executeUpdate();
 
             if (status == 1) {
-                createSuccesAlert(type);
+                ALert.createSuccesAlert(type, className);
 
                 allTasksButton();
                 allProjectsButton();
                 clearButton();
                 codeTb.requestFocus();
             } else {
-                createErrorAlert(type);
+                ALert.createErrorAlert(type, className);
             }
         } catch (SQLException e) {
-            createErrorAlert(type);
+            ALert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
     @FXML
-    public void click_ProjectView()
-    {
+    public void click_ProjectView() {
         Project selectedItem = (Project) projetTv.getSelectionModel().getSelectedItem();
         if(selectedItem != null) {
             actProject = selectedItem;
@@ -280,8 +260,7 @@ public class TaskController implements Initializable
     }
 
     @FXML
-    public void click_TaskView()
-    {
+    public void click_TaskView() {
         Task selectedItem = (Task) taskTv.getSelectionModel().getSelectedItem();
         if(selectedItem != null) {
             actTask = selectedItem;
@@ -290,9 +269,7 @@ public class TaskController implements Initializable
     }
 
     @FXML
-    public void searchProjectByCodeButton()
-    {
-        dataBase.connect();
+    public void searchProjectByCodeButton() {
         refreshProjectTable("SELECT * FROM proyects WHERE cod='"+ prjtTb.getText() +"'");
         ObservableList<Project> items = projetTv.getItems();
         if(!items.isEmpty()) {
@@ -300,12 +277,10 @@ public class TaskController implements Initializable
             loadTb();
         }
         loadTasks();
-        dataBase.close();
     }
 
     public void searchTaskByCodeButton()
     {
-        dataBase.connect();
         refreshTaskTable("SELECT * FROM tasks WHERE cod='"+ codeTb.getText() +"'");
         ObservableList<Task> items = taskTv.getItems();
         if(!items.isEmpty()) {
@@ -313,23 +288,16 @@ public class TaskController implements Initializable
             loadTb();
         }
         loadProjects();
-        dataBase.close();
     }
 
     @FXML
-    private void allTasksButton()
-    {
-        dataBase.connect();
+    private void allTasksButton() {
         refreshTaskTable("SELECT * FROM tasks ORDER BY cod");
-        dataBase.close();
     }
 
     @FXML
-    private void allProjectsButton()
-    {
-        dataBase.connect();
+    private void allProjectsButton() {
         refreshProjectTable("SELECT * FROM proyects ORDER BY cod");
-        dataBase.close();
     }
 
     @FXML
@@ -338,22 +306,4 @@ public class TaskController implements Initializable
     public void setStateOnHold() {stateLb.setText("not started");}
     @FXML
     public void setStateCompleted() {stateLb.setText("completed");}
-
-    /*-----------   ALERTS   -----------*/
-
-    public void createErrorAlert(String type){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Fail");
-        alert.setHeaderText("TASK MANAGEMENT");
-        alert.setContentText("Task " + type + " Failed");
-        alert.showAndWait();
-    }
-
-    public void createSuccesAlert(String type){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setHeaderText("TASK MANAGEMENT");
-        alert.setContentText("Task " + type + " Successfully");
-        alert.showAndWait();
-    }
 }

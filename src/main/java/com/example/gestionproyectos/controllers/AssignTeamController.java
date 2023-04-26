@@ -1,5 +1,6 @@
 package com.example.gestionproyectos.controllers;
 
+import com.example.gestionproyectos.clases.ALert;
 import com.example.gestionproyectos.clases.AssignTeam;
 import com.example.gestionproyectos.clases.Project;
 import com.example.gestionproyectos.clases.Team;
@@ -8,7 +9,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -23,8 +23,8 @@ import java.util.logging.Logger;
 import static com.example.gestionproyectos.data.dataBase.con;
 import static com.example.gestionproyectos.data.dataBase.pst;
 
-public class AssignTeamController implements Initializable
-{
+public class AssignTeamController implements Initializable {
+    private final String className = "Assign Team";
     Project project;
     Team team;
 
@@ -54,6 +54,7 @@ public class AssignTeamController implements Initializable
     @FXML
     private TableColumn <AssignTeam, String> pC;
 
+    /*----------------LOAD DATA----------------*/
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -70,22 +71,14 @@ public class AssignTeamController implements Initializable
 
             loadTeam();
             loadProject();
-            dataBase.close();
         }
-        else createErrorAlert("MySql Connection");
+        else ALert.createErrorAlert("MySql Connection",className);
     }
 
-    public void loadTeam()
-    {
-        codeTb.setText(team.getCode());
-    }
-    public void loadProject()
-    {
-        projectTb.setText(project.getCode());
-    }
+    public void loadTeam() { codeTb.setText(team.getCode()); }
+    public void loadProject() { projectTb.setText(project.getCode()); }
 
     private void refreshTeamsTable(String sql) {
-        dataBase.connect();
         String type = "SEARCH";
         ObservableList<Team> teams = FXCollections.observableArrayList();
         try{
@@ -106,14 +99,12 @@ public class AssignTeamController implements Initializable
             codeTeamColum.setCellValueFactory((f -> f.getValue().codeProperty()));
             nameTeamColum.setCellValueFactory(f -> f.getValue().nameProperty());
         } catch (Exception e){
-            createErrorAlert(type);
+            ALert.createErrorAlert(type,className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
     private void refreshAssignTable(String sql) {
-        dataBase.connect();
         String type = "SEARCH";
         ObservableList<AssignTeam> aTeams = FXCollections.observableArrayList();
         try{
@@ -133,10 +124,9 @@ public class AssignTeamController implements Initializable
             tC.setCellValueFactory(f -> f.getValue().cod_teamProperty());
             pC.setCellValueFactory(f -> f.getValue().cod_projectProperty());
         } catch (Exception e){
-            createErrorAlert(type);
+            ALert.createErrorAlert(type,className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
     private void loadTb() {
@@ -145,7 +135,6 @@ public class AssignTeamController implements Initializable
     }
 
     public void refreshTable(String sql){
-        dataBase.connect();
         String type = "SEARCH";
         ObservableList<Project> projects = FXCollections.observableArrayList();
         try{
@@ -164,15 +153,13 @@ public class AssignTeamController implements Initializable
             titleColum.setCellValueFactory(f -> f.getValue().titleProperty());
 
         } catch (Exception e){
-            createErrorAlert(type);
+            ALert.createErrorAlert(type,className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
     @FXML
-    public void click_TeamView()
-    {
+    public void click_TeamView() {
         Team selectedItem = (Team) teamsTv.getSelectionModel().getSelectedItem();
         if(selectedItem != null) {
             team = selectedItem;
@@ -180,8 +167,7 @@ public class AssignTeamController implements Initializable
         }
     }
 
-    public void click_AssignView()
-    {
+    public void click_AssignView() {
         AssignTeam selectedItem = (AssignTeam) assigTv.getSelectionModel().getSelectedItem();
         if(selectedItem != null) {
             codeTb.setText(selectedItem.getCod_team());
@@ -189,8 +175,7 @@ public class AssignTeamController implements Initializable
         }
     }
 
-    public void loadTbFromSelectedTableView()
-    {
+    public void loadTbFromSelectedTableView() {
         Project selectedItem = (Project) projTv.getSelectionModel().getSelectedItem();
         if(selectedItem != null) {
             project = selectedItem;
@@ -198,18 +183,17 @@ public class AssignTeamController implements Initializable
         }
     }
 
-    public void clearBt()
-    {
+    /*----------------BUTTONS----------------*/
+
+    public void clearBt() {
         codeTb.setText("");
         projectTb.setText("");
     }
 
     @FXML
-    public void addBt()
-    {
+    public void addBt() {
         String type = "INSERT";
         String sql = "INSERT INTO assignteam(cod_team, cod_proyect) values (?,?)";
-        dataBase.connect();
         String team = codeTb.getText();
         String project = projectTb.getText();
         try{
@@ -219,24 +203,22 @@ public class AssignTeamController implements Initializable
             int status = pst.executeUpdate();
 
             if(status == 1){
-                createSuccesAlert(type);
+                ALert.createSuccesAlert(type,className);
                 refreshAssignTable("select * from assignteam");
                 clearBt();
                 codeTb.requestFocus();
             } else {
-                createErrorAlert(type);
+                ALert.createErrorAlert(type,className);
             }
         } catch (SQLException e){
-            createErrorAlert(type);
+            ALert.createErrorAlert(type,className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
     public void deleteBt() {
         String type = "DELETE";
         String sql = "DELETE FROM assignteam WHERE cod_team=? AND cod_proyect=?";
-        dataBase.connect();
         String code = codeTb.getText();
         String project = projectTb.getText();
 
@@ -247,32 +229,27 @@ public class AssignTeamController implements Initializable
             int status = pst.executeUpdate();
 
             if (status == 1) {
-                createSuccesAlert(type);
+                ALert.createSuccesAlert(type, className);
                 clearBt();
                 codeTb.requestFocus();
             } else {
-                createErrorAlert(type);
+                ALert.createErrorAlert(type, className);
             }
         } catch (SQLException e) {
-            createErrorAlert(type);
+            ALert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
-    public void createErrorAlert(String type){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Fail");
-        alert.setHeaderText("Team MANAGEMENT");
-        alert.setContentText("Team " + type + " Failed");
-        alert.showAndWait();
+    public void SearchByProjectBt() {
+        refreshAssignTable("SELECT * FROM assignteam WHERE cod_proyect = '" + projectTb.getText() + "'");
     }
 
-    public void createSuccesAlert(String type){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setHeaderText("Team MANAGEMENT");
-        alert.setContentText("Team " + type + " Successfully");
-        alert.showAndWait();
+    public void SearchByTeam() {
+        refreshAssignTable("SELECT * FROM assignteam WHERE cod_team = '" + codeTb.getText() + "'");
+    }
+
+    public void ShowAll() {
+        refreshAssignTable("SELECT * FROM assignteam");
     }
 }
