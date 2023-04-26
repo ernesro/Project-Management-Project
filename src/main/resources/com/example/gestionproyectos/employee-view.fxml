@@ -1,12 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.gestionproyectos.controllers.EmployeeController" prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionproyectos.controllers.EmployeeController">
+<children>
+<TableView fx:id="employeesTv" layoutX="301.0" layoutY="39.0" onMouseClicked="#clickOnTableView" prefHeight="536.0" prefWidth="723.0">
+         <columns>
+            <TableColumn fx:id="dniColumn" prefWidth="116.20001220703125" text="Dni" />
+            <TableColumn fx:id="nameColumn" prefWidth="105.39996337890625" text="Name" />
+            <TableColumn fx:id="lastNameColumn" prefWidth="120.199951171875" text="Surname" />
+            <TableColumn fx:id="emailColumn" prefWidth="138.4000244140625" text="Email" />
+            <TableColumn fx:id="phoneColumn" prefWidth="107.4000244140625" text="Phone" />
+            <TableColumn fx:id="addressColumn" prefWidth="129.7999267578125" text="Address" />
+         </columns>
+</TableView>
+        <Button fx:id="addBt" layoutX="14.0" layoutY="300.0" mnemonicParsing="false" onAction="#addBt_Click" prefHeight="26.0" prefWidth="138.0" text="Add" />
+        <Button fx:id="editBt" layoutX="159.0" layoutY="300.0" mnemonicParsing="false" onAction="#editBt_Click" prefHeight="26.0" prefWidth="138.0" text="Edit" />
+        <Button fx:id="deleteBt" layoutX="159.0" layoutY="335.0" mnemonicParsing="false" onAction="#deleteBt_Click" prefHeight="26.0" prefWidth="138.0" text="Delete" />
+        <Button fx:id="clearBt" layoutX="14.0" layoutY="335.0" mnemonicParsing="false" onAction="#clearBt_Click" prefHeight="26.0" prefWidth="138.0" text="Clear" />
+    <TextField fx:id="dniTb" layoutX="72.0" layoutY="39.0" prefHeight="26.0" prefWidth="223.0" promptText="Dni" />
+    <TextField fx:id="nameTb" layoutX="74.0" layoutY="82.0" prefHeight="26.0" prefWidth="223.0" promptText="Name" />
+    <TextField fx:id="lastNameTb" layoutX="73.0" layoutY="118.0" prefHeight="26.0" prefWidth="223.0" promptText="Surname" />
+    <TextField fx:id="emailTb" layoutX="72.0" layoutY="154.0" prefHeight="26.0" prefWidth="223.0" promptText="Email" />
+    <TextField fx:id="phoneTb" layoutX="72.0" layoutY="197.0" prefHeight="26.0" prefWidth="223.0" promptText="Phone" />
+    <TextField fx:id="addressTb" layoutX="73.0" layoutY="243.0" prefHeight="26.0" prefWidth="223.0" promptText="Address" />
+    <Label layoutX="17.0" layoutY="5.0" text="Employees">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+    <Label layoutX="618.0" layoutY="14.0" text="Employees Table" />
+      <Label layoutX="14.0" layoutY="43.0" text="Dni:" />
+        <Label layoutX="14.0" layoutY="86.0" text="Name:" />
+        <Label layoutX="14.0" layoutY="122.0" text="Surname:" />
+        <Label layoutX="14.0" layoutY="158.0" text="Email:" />
+        <Label layoutX="14.0" layoutY="201.0" text="Phone:" />
+        <Label layoutX="14.0" layoutY="247.0" text="Address:" />
 
+      <Button fx:id="SearchByDniBt" layoutX="301.0" layoutY="9.0" mnemonicParsing="false" onAction="#SearchByDni_Click" prefHeight="26.0" prefWidth="138.0" text="Search by Dni" />
+      <Button fx:id="allBt" layoutX="885.0" layoutY="9.0" mnemonicParsing="false" onAction="#ShowAllBt_Click" prefHeight="26.0" prefWidth="138.0" text="Show all" />
+</children>
 
 </AnchorPane>

@@ -20,6 +20,7 @@ import static com.example.gestionproyectos.data.dataBase.pst;
 
 public class ProjectController implements Initializable
 {
+    private final String className = "Project";
     Project actProject;
 
     @FXML
@@ -52,13 +53,11 @@ public class ProjectController implements Initializable
             ObservableList<Project> items = projTb.getItems();
             actProject = items.get(0);
             loadTb();
-            dataBase.close();
         }
-        else ALert.createErrorAlert("MySql Connection");
+        else ALert.createErrorAlert("MySql Connection", className);
     }
 
-    public void loadTbFromSelectedTableView()
-    {
+    public void loadTbFromSelectedTableView() {
         Project selectedItem = (Project) projTb.getSelectionModel().getSelectedItem();
         if(selectedItem != null) {
             actProject = selectedItem;
@@ -66,8 +65,7 @@ public class ProjectController implements Initializable
         }
     }
 
-    public void loadTb()
-    {
+    public void loadTb() {
         codeTb.setText(actProject.getCode());
         descTb.setText(actProject.getDescription());
         tltTb.setText(actProject.getTitle());
@@ -97,136 +95,103 @@ public class ProjectController implements Initializable
                 stateColum.setCellValueFactory(f -> f.getValue().stateProperty());
 
         } catch (Exception e){
-            ALert.createErrorAlert(type);
+            ALert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
     /*-----------  BUTTONS  --------------*/
 
-    public void clearButton()
-    {
+    public void clearButton() {
         codeTb.setText("");
         descTb.setText("");
         tltTb.setText("");
         stateLb.setText("");
     }
 
-    public void addButton()
-    {
+    public void addButton() {
         String type = "INSERT";
         String sql = "INSERT INTO proyects(cod, title, description, state) values (?,?,?,?)";
-        dataBase.connect();
-        String code = codeTb.getText();
-        String title = tltTb.getText();
-        String desc = descTb.getText();
-        String state = stateLb.getText();
         try{
             pst = con.prepareStatement(sql);
-            pst.setString(1, code);
-            pst.setString(2, title);
-            pst.setString(3, desc);
-            pst.setString(4, state);
+            pst.setString(1, codeTb.getText());
+            pst.setString(2, tltTb.getText());
+            pst.setString(3, descTb.getText());
+            pst.setString(4, stateLb.getText());
             int status = pst.executeUpdate();
 
             if(status == 1){
-                ALert.createSuccesAlert(type);
+                ALert.createSuccesAlert(type,className);
 
                 refreshTable("SELECT * FROM proyects ORDER BY cod");
                 clearButton();
                 codeTb.requestFocus();
             } else {
-                ALert.createErrorAlert(type);
+                ALert.createErrorAlert(type, className);
             }
         } catch (SQLException e){
-            ALert.createErrorAlert(type);
+            ALert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
-    public void updateButton()
-    {
+    public void updateButton() {
         String type = "UPDATE";
         String sql = "UPDATE proyects SET title=?, description=?, state=? WHERE cod=?";
-        dataBase.connect();
-
-        String code = codeTb.getText();
-        String title = tltTb.getText();
-        String desc = descTb.getText();
-        String state = stateLb.getText();
         try{
             pst = con.prepareStatement(sql);
-            pst.setString(4, code);
-            pst.setString(1, title);
-            pst.setString(2, desc);
-            pst.setString(3, state);
-
+            pst.setString(1, tltTb.getText());
+            pst.setString(2, descTb.getText());
+            pst.setString(3, stateLb.getText());
+            pst.setString(4, codeTb.getText());
             int status = pst.executeUpdate();
-
             if(status == 1){
-                ALert.createSuccesAlert(type);
-
+                ALert.createSuccesAlert(type, className);
                 refreshTable("SELECT * FROM proyects ORDER BY cod");
                 clearButton();
                 codeTb.requestFocus();
             } else {
-                ALert.createErrorAlert(type);
+                ALert.createErrorAlert(type, className);
             }
         } catch (SQLException e){
-            ALert.createErrorAlert(type);
+            ALert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
     public void deleteButton() {
         String type = "DELETE";
         String sql = "DELETE FROM proyects WHERE cod=?";
-        dataBase.connect();
-
         String code = codeTb.getText();
         try {
             pst = con.prepareStatement(sql);
             pst.setString(1, code);
             int status = pst.executeUpdate();
-
             if (status == 1) {
-                ALert.createSuccesAlert(type);
-
+                ALert.createSuccesAlert(type, className);
                 refreshTable("SELECT * FROM proyects ORDER BY cod");
                 clearButton();
                 codeTb.requestFocus();
             } else {
-                ALert.createErrorAlert(type);
+                ALert.createErrorAlert(type, className);
             }
         } catch (SQLException e) {
-            ALert.createErrorAlert(type);
+            ALert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
-    public void searchByCodeButton()
-    {
-        dataBase.connect();
+    public void searchByCodeButton() {
         refreshTable("SELECT * FROM proyects WHERE cod='"+ codeTb.getText() +"'");
         ObservableList<Project> items = projTb.getItems();
         if(!items.isEmpty()) {
             actProject = items.get(0);
             loadTb();
         }
-        dataBase.close();
     }
 
     @FXML
-    private void allButton()
-    {
-        dataBase.connect();
-        refreshTable("SELECT * FROM proyects ORDER BY cod");
-        dataBase.close();
-    }
+    private void allButton() { refreshTable("SELECT * FROM proyects ORDER BY cod"); }
 
     public void setStateInProgress() {stateLb.setText("in progress");}
     public void setStateOnHold() {stateLb.setText("on hold");}
