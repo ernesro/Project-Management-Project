@@ -1,14 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.gestionproyectos.controllers.AssignTaskController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="596.0" prefWidth="989.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionproyectos.controllers.AssignTaskController">
+   <children>
+      <TableView fx:id="assignTaskTv" layoutX="318.0" layoutY="335.0" onMouseClicked="#assignTvClick" prefHeight="246.0" prefWidth="294.0">
+        <columns>
+          <TableColumn fx:id="assignTaskColumn" prefWidth="147.19998168945312" text="Employee" />
+          <TableColumn fx:id="assignEmployeeColumn" prefWidth="142.4000244140625" text="Task" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tasksTv" layoutX="318.0" layoutY="36.0" onMouseClicked="#taskTvClick" prefHeight="246.0" prefWidth="294.0">
+        <columns>
+          <TableColumn fx:id="taskCodeColumn" prefWidth="94.19998168945312" text="Code" />
+          <TableColumn fx:id="taskTitleColumn" prefWidth="197.0" text="Title" />
+        </columns>
+      </TableView>
+      <TableView fx:id="employeesTv" layoutX="634.0" layoutY="36.0" onMouseClicked="#employeesTvClick" prefHeight="546.0" prefWidth="342.0">
+        <columns>
+          <TableColumn fx:id="employeeDniColumn" prefWidth="115.20001220703125" text="Dni" />
+          <TableColumn fx:id="employeeNameColumn" prefWidth="120.800048828125" text="Name" />
+            <TableColumn fx:id="employeeLNameColumn" prefWidth="104.0" text="Last_Name" />
+        </columns>
+      </TableView>
+      <Label layoutX="425.0" layoutY="300.0" text="Assigned Tasks" />
+      <Label layoutX="451.0" layoutY="5.0" text="Tasks" />
+      <Label layoutX="776.0" layoutY="5.0" text="Employees" />
+      <Label layoutX="14.0" layoutY="14.0" text="Tasks Assignment">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="87.0" text="Dni" />
+      <Label layoutX="11.0" layoutY="176.0" text="Task" />
+      <TextField fx:id="employeeTb" layoutX="66.0" layoutY="83.0" prefHeight="26.0" prefWidth="240.0" />
+      <TextField fx:id="taskTb" layoutX="66.0" layoutY="172.0" prefHeight="26.0" prefWidth="240.0" />
+      <Button layoutX="12.0" layoutY="296.0" mnemonicParsing="false" onAction="#addBtnClick" prefHeight="26.0" prefWidth="128.0" text="Add" />
+      <Button layoutX="178.0" layoutY="335.0" mnemonicParsing="false" onAction="#clearBtnClick" prefHeight="26.0" prefWidth="128.0" text="Clear" />
+      <Button layoutX="66.0" layoutY="208.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="240.0" text="Search Task " />
+      <Button layoutX="12.0" layoutY="335.0" mnemonicParsing="false" onAction="#deleteBtnClick" prefHeight="26.0" prefWidth="128.0" text="Delete" />
+      <Button layoutX="178.0" layoutY="554.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="128.0" text="Search by task" />
+      <Button layoutX="178.0" layoutY="513.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="128.0" text="Search by Employee" />
+      <Button layoutX="178.0" layoutY="475.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="128.0" text="Show All" />
+      <Button layoutX="66.0" layoutY="118.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="240.0" text="Search Employee" />
+   </children>
 </AnchorPane>

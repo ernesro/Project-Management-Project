@@ -48,14 +48,20 @@ public class WelcomeController implements Initializable
         dataBase.close();
     }
 
+    public void employeesBt_Click() throws IOException {
+        WindowFXML window = new WindowFXML("employee-view.fxml");
+        window.showAndWait();
+        dataBase.close();
+    }
+
     public void assignTeamBt_Click() throws IOException {
         WindowFXML window = new WindowFXML("assignTeam-view.fxml");
         window.showAndWait();
         dataBase.close();
     }
 
-    public void employeesBt_Click() throws IOException {
-        WindowFXML window = new WindowFXML("employee-view.fxml");
+    public void assignTaskBt_Click() throws IOException {
+        WindowFXML window = new WindowFXML("assignTask-view.fxml");
         window.showAndWait();
         dataBase.close();
     }

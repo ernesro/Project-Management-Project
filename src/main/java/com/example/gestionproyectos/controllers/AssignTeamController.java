@@ -25,8 +25,8 @@ import static com.example.gestionproyectos.data.dataBase.pst;
 
 public class AssignTeamController implements Initializable {
     private final String className = "Assign Team";
-    Project project;
-    Team team;
+    private Project project;
+    private Team team;
 
     @FXML
     private TextField codeTb;

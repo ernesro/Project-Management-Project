@@ -6,13 +6,13 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionproyectos.controllers.WelcomeController">
    <children>
-      <Button fx:id="tasksBt" layoutX="14.0" layoutY="359.0" mnemonicParsing="false" onAction="#tasksBt_Click" prefHeight="26.0" prefWidth="138.0" text="Tasks" />
-      <Button fx:id="commBt" layoutX="171.0" layoutY="359.0" mnemonicParsing="false" onAction="#commentsBt_Click" prefHeight="26.0" prefWidth="115.0" text="Comments" />
-      <Button fx:id="asigBt" layoutX="447.0" layoutY="359.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="138.0" text="Assign Tasks" />
-      <Button fx:id="teamsBt" layoutX="307.0" layoutY="359.0" mnemonicParsing="false" onAction="#teamBt_Click" prefHeight="26.0" prefWidth="123.0" text="Teams" />
-      <Button fx:id="projBt" layoutX="14.0" layoutY="275.0" mnemonicParsing="false" onAction="#projectsBt_Click" prefHeight="26.0" prefWidth="145.0" text="Projects" />
-      <Button fx:id="emplBt" layoutX="439.0" layoutY="275.0" mnemonicParsing="false" onAction="#employeesBt_Click" prefHeight="26.0" prefWidth="145.0" text="Employees" />
+      <Button fx:id="tasksBt" layoutX="128.0" layoutY="275.0" mnemonicParsing="false" onAction="#tasksBt_Click" prefHeight="26.0" prefWidth="107.0" text="Tasks" />
+      <Button fx:id="commBt" layoutX="470.0" layoutY="275.0" mnemonicParsing="false" onAction="#commentsBt_Click" prefHeight="26.0" prefWidth="115.0" text="Comments" />
+      <Button fx:id="asigBt" layoutX="424.0" layoutY="332.0" mnemonicParsing="false" onAction="#assignTaskBt_Click" prefHeight="26.0" prefWidth="161.0" text="Assign Tasks" />
+      <Button fx:id="teamsBt" layoutX="356.0" layoutY="275.0" mnemonicParsing="false" onAction="#teamBt_Click" prefHeight="26.0" prefWidth="107.0" text="Teams" />
+      <Button fx:id="projBt" layoutX="14.0" layoutY="275.0" mnemonicParsing="false" onAction="#projectsBt_Click" prefHeight="26.0" prefWidth="107.0" text="Projects" />
+      <Button fx:id="emplBt" layoutX="242.0" layoutY="275.0" mnemonicParsing="false" onAction="#employeesBt_Click" prefHeight="26.0" prefWidth="107.0" text="Employees" />
       <ImageView fx:id="img" fitHeight="239.0" fitWidth="573.0" layoutX="-52.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" translateX="65.0" />
-      <Button fx:id="asigBt1" layoutX="14.0" layoutY="317.0" mnemonicParsing="false" onAction="#assignTeamBt_Click" prefHeight="26.0" prefWidth="138.0" text="Assign Team" />
+      <Button fx:id="asigBt1" layoutX="13.0" layoutY="332.0" mnemonicParsing="false" onAction="#assignTeamBt_Click" prefHeight="26.0" prefWidth="162.0" text="Assign Team" />
    </children>
 </AnchorPane>

@@ -6,18 +6,18 @@ import javafx.beans.property.StringProperty;
 public class AssignTask
 {
     private final StringProperty employee;
-    private final StringProperty project;
+    private final StringProperty task;
 
     public AssignTask() {
         employee = new SimpleStringProperty(this, "employee");
-        project = new SimpleStringProperty(this, "project");
+        task = new SimpleStringProperty(this, "task");
     }
 
     public StringProperty employeeProperty() {return employee; }
     public String getEmployee() {return employee.getValue();}
     public void setEmployee(String state) {this.employee.setValue(state);}
 
-    public StringProperty projectProperty() {return project; }
-    public String getProject() {return project.getValue();}
-    public void setProject(String project) {this.project.setValue(project);}
+    public StringProperty taskProperty() {return task; }
+    public String getTask() {return task.getValue();}
+    public void setTask(String state) {this.task.setValue(state);}
 }

@@ -20,7 +20,7 @@
       </TableView>
       <TextField fx:id="codeTb" layoutX="114.0" layoutY="116.0" prefHeight="26.0" prefWidth="170.0" />
       <Button layoutX="14.0" layoutY="264.0" mnemonicParsing="false" onAction="#addBt" prefHeight="26.0" prefWidth="118.0" text="Add" />
-      <Label layoutX="14.0" layoutY="19.0" text="Team assignment">
+      <Label layoutX="14.0" layoutY="19.0" text="Team Assignment">
          <font>
             <Font size="24.0" />
          </font></Label>
