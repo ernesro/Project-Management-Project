@@ -25,43 +25,43 @@ public class WelcomeController implements Initializable
     }
 
     public void projectsBt_Click() throws IOException {
-        WindowFXML window = new WindowFXML("project-view.fxml");
+        WindowFXML window = new WindowFXML("project-view.fxml", 1010, 600);
         window.showAndWait();
         dataBase.close();
     }
 
     public void tasksBt_Click() throws IOException {
-        WindowFXML window = new WindowFXML("tasks-view.fxml");
+        WindowFXML window = new WindowFXML("tasks-view.fxml", 1038, 592);
         window.showAndWait();
         dataBase.close();
     }
 
     public void commentsBt_Click() throws IOException {
-        WindowFXML window = new WindowFXML("comment-view.fxml");
+        WindowFXML window = new WindowFXML("comment-view.fxml", 923, 598);
         window.showAndWait();
         dataBase.close();
     }
 
     public void teamBt_Click() throws IOException {
-        WindowFXML window = new WindowFXML("team-view.fxml");
+        WindowFXML window = new WindowFXML("team-view.fxml", 971, 566);
         window.showAndWait();
         dataBase.close();
     }
 
     public void employeesBt_Click() throws IOException {
-        WindowFXML window = new WindowFXML("employee-view.fxml");
+        WindowFXML window = new WindowFXML("employee-view.fxml", 1070, 600);
         window.showAndWait();
         dataBase.close();
     }
 
     public void assignTeamBt_Click() throws IOException {
-        WindowFXML window = new WindowFXML("assignTeam-view.fxml");
+        WindowFXML window = new WindowFXML("assignTeam-view.fxml", 992, 554);
         window.showAndWait();
         dataBase.close();
     }
 
     public void assignTaskBt_Click() throws IOException {
-        WindowFXML window = new WindowFXML("assignTask-view.fxml");
+        WindowFXML window = new WindowFXML("assignTask-view.fxml", 989, 596);
         window.showAndWait();
         dataBase.close();
     }
