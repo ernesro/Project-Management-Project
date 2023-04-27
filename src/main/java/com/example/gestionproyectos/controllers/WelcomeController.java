@@ -2,6 +2,7 @@ package com.example.gestionproyectos.controllers;
 
 import com.example.gestionproyectos.WindowFXML;
 import com.example.gestionproyectos.data.dataBase;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
@@ -62,6 +63,12 @@ public class WelcomeController implements Initializable
 
     public void assignTaskBt_Click() throws IOException {
         WindowFXML window = new WindowFXML("assignTask-view.fxml", 989, 596);
+        window.showAndWait();
+        dataBase.close();
+    }
+
+    public void assignEmployeeBt() throws IOException {
+        WindowFXML window = new WindowFXML("assignEmployee-view.fxml", 989, 596);
         window.showAndWait();
         dataBase.close();
     }

@@ -7,6 +7,7 @@ import com.example.gestionproyectos.clases.Task;
 import com.example.gestionproyectos.data.dataBase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -25,7 +26,7 @@ import static com.example.gestionproyectos.data.dataBase.con;
 import static com.example.gestionproyectos.data.dataBase.pst;
 
 public class AssignTaskController implements Initializable {
-    private final String className = "Task";
+    private final String className = "Task Assign";
     private Employee employee;
     private Task task;
 
@@ -73,6 +74,7 @@ public class AssignTaskController implements Initializable {
            refreshAssignTaskTable("SELECT * FROM assigntask");
 
         }
+        else { CustomAlert.createErrorAlert("CONNECT",className); }
     }
 
     private void refreshAssignTaskTable(String sql) {
@@ -99,7 +101,6 @@ public class AssignTaskController implements Initializable {
 
     private void refreshEmployeeTable(String sql) {
         String type = "SEARCH";
-
         ObservableList<Employee> employeeList = FXCollections.observableArrayList();
         try{
             pst = con.prepareStatement(sql);
@@ -227,5 +228,23 @@ public class AssignTaskController implements Initializable {
     public void clearBtnClick() {
         employeeTb.setText("");
         taskTb.setText("");
+    }
+
+    public void SearchInTaskTable() { refreshTaskTable("SELECT * FROM tasks WHERE cod = '" + taskTb.getText() + "'"); }
+    public void SearchInEmployeeTable() {refreshEmployeeTable("SELECT * FROM employees WHERE dni = '" + employeeTb.getText() + "'");}
+
+
+    public void ShowAllBt() {
+        refreshAssignTaskTable("SELECT * FROM assigntask");
+        refreshEmployeeTable("SELECT * FROM employees");
+        refreshTaskTable("SELECT * FROM tasks");
+    }
+
+    public void SearchInAssignTaskByEmployee() {
+        refreshAssignTaskTable("SELECT * FROM assigntask WHERE dni = '" + employeeTb.getText() + "'");
+    }
+
+    public void SearchInAssignTaskByTask() {
+        refreshAssignTaskTable("SELECT * FROM assigntask WHERE cod_task = '" + taskTb.getText() + "'");
     }
 }

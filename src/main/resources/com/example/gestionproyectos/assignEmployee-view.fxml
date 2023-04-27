@@ -1,14 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.gestionproyectos.controllers.AssignEmployeeController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionproyectos.controllers.AssignEmployeeController">
+   <children>
+      <TableView fx:id="employeesTv" layoutX="535.0" layoutY="33.0" onMouseClicked="#employeeClick" prefHeight="552.0" prefWidth="446.0">
+        <columns>
+          <TableColumn fx:id="employeeDniColumn" prefWidth="97.20001220703125" text="Dni" />
+          <TableColumn fx:id="employeeNameColumn" prefWidth="96.79998779296875" text="Name" />
+            <TableColumn fx:id="employeeLNameColumn" prefWidth="105.60003662109375" text="Last_Name" />
+            <TableColumn fx:id="employeeEmailColumn" prefWidth="146.39996337890625" text="Email" />
+        </columns>
+      </TableView>
+      <Label layoutX="729.0" layoutY="5.0" text="Employees" />
+      <TableView fx:id="teamsTv" layoutX="272.0" layoutY="33.0" onMouseClicked="#teamClick" prefHeight="250.0" prefWidth="250.0">
+        <columns>
+          <TableColumn fx:id="teamCodeColumn" prefWidth="83.19998168945312" text="Code" />
+          <TableColumn fx:id="teamNameColumn" prefWidth="164.79998779296875" text="Name" />
+        </columns>
+      </TableView>
+      <TableView fx:id="assignEmployeeTv" layoutX="272.0" layoutY="335.0" onMouseClicked="#assignEmployeeTeam" prefHeight="250.0" prefWidth="250.0">
+         <columns>
+            <TableColumn fx:id="assignEmployeeColumn" prefWidth="121.19998168945312" text="Employee" />
+            <TableColumn fx:id="assignTeamColumn" prefWidth="127.5999755859375" text="Team" />
+         </columns>
+      </TableView>
+      <Label layoutX="383.0" layoutY="5.0" text="Teams" />
+      <Label layoutX="346.0" layoutY="300.0" text="Assigned Employees" />
+      <Label layoutX="14.0" layoutY="14.0" text="Employee Assignment">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="78.0" text="Employee" />
+      <Label layoutX="14.0" layoutY="181.0" text="Team" />
+      <TextField fx:id="employeeTb" layoutX="81.0" layoutY="74.0" prefHeight="26.0" prefWidth="181.0" />
+      <TextField fx:id="teamTb" layoutX="80.0" layoutY="177.0" prefHeight="26.0" prefWidth="182.0" />
+      <Button layoutX="81.0" layoutY="110.0" mnemonicParsing="false" onAction="#searchEmployeeInEmployeesBt" prefHeight="26.0" prefWidth="182.0" text="Search in Employees table" />
+      <Button layoutX="80.0" layoutY="217.0" mnemonicParsing="false" onAction="#searchTeamInTeams" prefHeight="26.0" prefWidth="182.0" text="Search in Teams table" />
+      <Button layoutX="14.0" layoutY="335.0" mnemonicParsing="false" onAction="#addAssignEmployee" prefHeight="26.0" prefWidth="109.0" text="Add" />
+      <Button layoutX="153.0" layoutY="335.0" mnemonicParsing="false" onAction="#clearBt" prefHeight="26.0" prefWidth="109.0" text="Clear" />
+      <Button layoutX="14.0" layoutY="372.0" mnemonicParsing="false" onAction="#deleteBt" prefHeight="26.0" prefWidth="109.0" text="Delete" />
+      <Button layoutX="137.0" layoutY="558.0" mnemonicParsing="false" onAction="#searchByTeamBt" prefHeight="26.0" prefWidth="126.0" text="Search by Team" />
+      <Button layoutX="137.0" layoutY="524.0" mnemonicParsing="false" onAction="#searchByEmployeeBt" prefHeight="26.0" prefWidth="126.0" text="Search by Employee" />
+      <Button layoutX="137.0" layoutY="489.0" mnemonicParsing="false" onAction="#showAllBt" prefHeight="26.0" prefWidth="126.0" text="Show All" />
+   </children>
 </AnchorPane>
