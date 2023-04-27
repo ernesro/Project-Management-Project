@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 import static com.example.gestionproyectos.data.dataBase.con;
 import static com.example.gestionproyectos.data.dataBase.pst;
 
-public class AssignTaskController implements Initializable {
+public class AssignTaskController extends CustomAlert implements Initializable {
     private final String className = "Task Assign";
     private Employee employee;
     private Task task;

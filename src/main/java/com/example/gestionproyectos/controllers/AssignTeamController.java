@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 import static com.example.gestionproyectos.data.dataBase.con;
 import static com.example.gestionproyectos.data.dataBase.pst;
 
-public class AssignTeamController implements Initializable {
+public class AssignTeamController extends CustomAlert implements Initializable {
     private final String className = "Assign Team";
     private Project project;
     private Team team;

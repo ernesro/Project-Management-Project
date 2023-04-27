@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 import static com.example.gestionproyectos.data.dataBase.con;
 import static com.example.gestionproyectos.data.dataBase.pst;
 
-public class CommentController implements Initializable {
+public class CommentController extends CustomAlert implements Initializable {
     private final String className = "Comment";
     Task actTask;
     Project actProject;

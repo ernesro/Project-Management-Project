@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 
 import static com.example.gestionproyectos.data.dataBase.*;
 
-public class AssignEmployeeController implements Initializable {
+public class AssignEmployeeController extends dataBase implements Initializable {
     private final String className = "Employee Assign";
     private Team team;
     private Employee employee;

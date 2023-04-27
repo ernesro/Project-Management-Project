@@ -1,9 +1,9 @@
 package com.example.gestionproyectos.clases;
 
+import com.example.gestionproyectos.controllers.AssignEmployeeController;
 import javafx.scene.control.Alert;
 
-public class CustomAlert
-{
+public class CustomAlert extends AssignEmployeeController {
     public static void createErrorAlert(String type, String className){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Fail");

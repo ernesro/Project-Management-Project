@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 import static com.example.gestionproyectos.data.dataBase.con;
 import static com.example.gestionproyectos.data.dataBase.pst;
 
-public class TaskController implements Initializable {
+public class TaskController extends CustomAlert implements Initializable {
     private final String className = "Task";
     Task actTask;
     Project actProject;

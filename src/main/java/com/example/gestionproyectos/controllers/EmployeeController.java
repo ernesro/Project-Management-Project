@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 import static com.example.gestionproyectos.data.dataBase.con;
 import static com.example.gestionproyectos.data.dataBase.pst;
 
-public class EmployeeController implements Initializable {
+public class EmployeeController extends CustomAlert implements Initializable {
 
     private final String className = "Employee";
     Employee employee;

@@ -1,5 +1,6 @@
 package com.example.gestionproyectos.controllers;
 
+import com.example.gestionproyectos.Application;
 import com.example.gestionproyectos.WindowFXML;
 import com.example.gestionproyectos.data.dataBase;
 import javafx.fxml.FXML;
@@ -11,7 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class WelcomeController implements Initializable
+public class WelcomeController extends Application implements Initializable
 {
     @FXML
     private ImageView img;
