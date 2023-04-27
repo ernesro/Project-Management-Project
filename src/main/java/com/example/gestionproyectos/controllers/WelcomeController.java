@@ -2,7 +2,6 @@ package com.example.gestionproyectos.controllers;
 
 import com.example.gestionproyectos.WindowFXML;
 import com.example.gestionproyectos.data.dataBase;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
@@ -18,7 +17,7 @@ public class WelcomeController implements Initializable
     private ImageView img;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Image image = new Image(getClass().getResourceAsStream("/imgs/descarga.jpeg"));
+        Image image = new Image(getClass().getResourceAsStream("/imgs/mainImage.jpeg"));
         img.setImage(image);
         img.setX(75);
         img.fitHeightProperty();
