@@ -1,6 +1,6 @@
 package com.example.gestionproyectos.controllers;
 
-import com.example.gestionproyectos.clases.ALert;
+import com.example.gestionproyectos.clases.CustomAlert;
 import com.example.gestionproyectos.clases.Employee;
 import com.example.gestionproyectos.data.dataBase;
 import javafx.collections.FXCollections;
@@ -62,7 +62,7 @@ public class EmployeeController implements Initializable {
             employee = items.get(0);
             loadTb();
         }
-        else ALert.createErrorAlert("MySql Connection", className);
+        else CustomAlert.createErrorAlert("MySql Connection", className);
     }
 
     public void loadTb(){
@@ -108,7 +108,7 @@ public class EmployeeController implements Initializable {
             emailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
 
         } catch (Exception e) {
-            ALert.createErrorAlert(type, className);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -128,13 +128,13 @@ public class EmployeeController implements Initializable {
             pst.setString(6, emailTb.getText());
             int status = pst.executeUpdate();
             if(status > 0){
-                ALert.createSuccesAlert(type, className);
+                CustomAlert.createSuccesAlert(type, className);
                 refreshTable("SELECT * FROM employees ORDER BY dni");
             }
             else
-                ALert.createErrorAlert(type, className);
+                CustomAlert.createErrorAlert(type, className);
         } catch (Exception e) {
-            ALert.createErrorAlert(type, className);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -152,13 +152,13 @@ public class EmployeeController implements Initializable {
             pst.setString(6, dniTb.getText());
             int status = pst.executeUpdate();
             if(status > 0){
-                ALert.createSuccesAlert(type, className);
+                CustomAlert.createSuccesAlert(type, className);
                 refreshTable("SELECT * FROM employees ORDER BY dni");
             }
             else
-                ALert.createErrorAlert(type, className);
+                CustomAlert.createErrorAlert(type, className);
         } catch (Exception e) {
-            ALert.createErrorAlert(type, className);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -171,13 +171,13 @@ public class EmployeeController implements Initializable {
             pst.setString(1, dniTb.getText());
             int status = pst.executeUpdate();
             if(status > 0){
-                ALert.createSuccesAlert(type, className);
+                CustomAlert.createSuccesAlert(type, className);
                 refreshTable("SELECT * FROM employees ORDER BY dni");
             }
             else
-                ALert.createErrorAlert(type, className);
+                CustomAlert.createErrorAlert(type, className);
         } catch (Exception e) {
-            ALert.createErrorAlert(type, className);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }

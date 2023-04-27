@@ -1,6 +1,6 @@
 package com.example.gestionproyectos.controllers;
 
-import com.example.gestionproyectos.clases.ALert;
+import com.example.gestionproyectos.clases.CustomAlert;
 import com.example.gestionproyectos.clases.Project;
 import com.example.gestionproyectos.clases.Task;
 import com.example.gestionproyectos.data.dataBase;
@@ -20,8 +20,7 @@ import java.util.logging.Logger;
 import static com.example.gestionproyectos.data.dataBase.con;
 import static com.example.gestionproyectos.data.dataBase.pst;
 
-public class TaskController implements Initializable
-{
+public class TaskController implements Initializable {
     private final String className = "Task";
     Task actTask;
     Project actProject;
@@ -74,7 +73,7 @@ public class TaskController implements Initializable
 
             loadTb();
         }
-        else ALert.createErrorAlert("MySql Connection", className);
+        else CustomAlert.createErrorAlert("MySql Connection", className);
     }
 
     public void refreshProjectTable(String sql) {
@@ -94,7 +93,7 @@ public class TaskController implements Initializable
             pCodeColum.setCellValueFactory(f -> f.getValue().codeProperty());
             pTitleColum.setCellValueFactory(f -> f.getValue().titleProperty());
         } catch (Exception e){
-            ALert.createErrorAlert(type, className);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -125,7 +124,7 @@ public class TaskController implements Initializable
             tDescColum.setCellValueFactory(f -> f.getValue().descriptionProperty());
             tStateColum.setCellValueFactory(f -> f.getValue().stateProperty());
         } catch (Exception e){
-            ALert.createErrorAlert(type, className);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -176,16 +175,16 @@ public class TaskController implements Initializable
             int status = pst.executeUpdate();
 
             if(status == 1){
-                ALert.createSuccesAlert(type, className);
+                CustomAlert.createSuccesAlert(type, className);
 
                 loadTasks();
                 clearButton();
                 codeTb.requestFocus();
             } else {
-                ALert.createErrorAlert(type, className);
+                CustomAlert.createErrorAlert(type, className);
             }
         } catch (SQLException e){
-            ALert.createErrorAlert(type, className);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -209,16 +208,16 @@ public class TaskController implements Initializable
             int status = pst.executeUpdate();
 
             if(status == 1){
-                ALert.createSuccesAlert(type, className);
+                CustomAlert.createSuccesAlert(type, className);
 
                 loadTasks();
                 clearButton();
                 codeTb.requestFocus();
             } else {
-                ALert.createErrorAlert(type, className);
+                CustomAlert.createErrorAlert(type, className);
             }
         } catch (SQLException e){
-            ALert.createErrorAlert(type, className);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -234,17 +233,17 @@ public class TaskController implements Initializable
             int status = pst.executeUpdate();
 
             if (status == 1) {
-                ALert.createSuccesAlert(type, className);
+                CustomAlert.createSuccesAlert(type, className);
 
                 allTasksButton();
                 allProjectsButton();
                 clearButton();
                 codeTb.requestFocus();
             } else {
-                ALert.createErrorAlert(type, className);
+                CustomAlert.createErrorAlert(type, className);
             }
         } catch (SQLException e) {
-            ALert.createErrorAlert(type, className);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }

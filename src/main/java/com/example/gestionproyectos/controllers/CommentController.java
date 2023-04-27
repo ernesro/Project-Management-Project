@@ -1,5 +1,6 @@
 package com.example.gestionproyectos.controllers;
 
+import com.example.gestionproyectos.clases.CustomAlert;
 import com.example.gestionproyectos.clases.Comment;
 import com.example.gestionproyectos.clases.Project;
 import com.example.gestionproyectos.clases.Task;
@@ -20,8 +21,8 @@ import java.util.logging.Logger;
 import static com.example.gestionproyectos.data.dataBase.con;
 import static com.example.gestionproyectos.data.dataBase.pst;
 
-public class CommentController implements Initializable
-{
+public class CommentController implements Initializable {
+    private final String className = "Comment";
     Task actTask;
     Project actProject;
     Comment actComment;
@@ -78,13 +79,11 @@ public class CommentController implements Initializable
             actComment = cItems.get(0);
 
             loadTb();
-            dataBase.close();
         }
-        else createErrorAlert("MySql Connection");
+        else CustomAlert.createErrorAlert("MySql Connection", className);
     }
 
     private void refreshCommentsTable(String sql) {
-        dataBase.connect();
         String type = "SEARCH";
         ObservableList<Comment> comments = FXCollections.observableArrayList();
         try{
@@ -106,14 +105,12 @@ public class CommentController implements Initializable
             cContent.setCellValueFactory(f -> f.getValue().contentProperty());
             cTask.setCellValueFactory(f -> f.getValue().cod_taskProperty());
         } catch (Exception e){
-            createErrorAlert(type);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
     private void refreshTasksTable(String sql) {
-        dataBase.connect();
         String type = "SEARCH";
         ObservableList<Task> tasks = FXCollections.observableArrayList();
         try{
@@ -135,14 +132,12 @@ public class CommentController implements Initializable
             tTitle.setCellValueFactory(f -> f.getValue().titleProperty());
             tProject.setCellValueFactory(f -> f.getValue().projectProperty());
         } catch (Exception e){
-            createErrorAlert(type);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
     private void refreshProjectsTable(String sql) {
-        dataBase.connect();
         String type = "SEARCH";
         ObservableList<Project> projects = FXCollections.observableArrayList();
         try{
@@ -159,36 +154,28 @@ public class CommentController implements Initializable
             pCode.setCellValueFactory(f -> f.getValue().codeProperty());
             pTitle.setCellValueFactory(f -> f.getValue().titleProperty());
         } catch (Exception e){
-            createErrorAlert(type);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
     public void loadTasks()
     {
-        dataBase.connect();
         refreshTasksTable("SELECT * FROM tasks WHERE cod_proyect='" + actProject.getCode() +"'");
-        dataBase.close();
     }
 
-    public void loadComments()
-    {
-        dataBase.connect();
+    public void loadComments() {
         refreshCommentsTable("SELECT * FROM comments WHERE cod_task='" + actTask.getCode() +"'");
-        dataBase.close();
     }
 
-    public void loadTb()
-    {
+    public void loadTb() {
         codeTb.setText(actComment.getCode());
         contentTb.setText(actComment.getContent());
         taskTb.setText(actComment.getCod_task());
     }
 
     @FXML
-    public void click_ProjectView()
-    {
+    public void click_ProjectView() {
         Project selectedItem = (Project) projectsTv.getSelectionModel().getSelectedItem();
         if(selectedItem != null) {
             actProject = selectedItem;
@@ -197,8 +184,7 @@ public class CommentController implements Initializable
     }
 
     @FXML
-    public void click_TaskView()
-    {
+    public void click_TaskView() {
         Task selectedItem = (Task) tasksTv.getSelectionModel().getSelectedItem();
         if(selectedItem != null) {
             actTask = selectedItem;
@@ -206,8 +192,7 @@ public class CommentController implements Initializable
         }
     }
 
-    public void click_CommentView()
-    {
+    public void click_CommentView() {
         Comment selectedItem = (Comment) commentsTv.getSelectionModel().getSelectedItem();
         if(selectedItem != null) {
             actComment = selectedItem;
@@ -217,49 +202,44 @@ public class CommentController implements Initializable
 
     /*--------------  BUTTONS  --------------*/
 
-    public void clearButton()
-    {
+    public void clearButton() {
         codeTb.setText("");
         taskTb.setText("");
         contentTb.setText("");
     }
 
     @FXML
-    public void addBt()
-    {
+    public void addBt() {
         String type = "INSERT";
         String sql = "INSERT INTO comments(cod, cod_task, content) values (?,?,?)";
-        dataBase.connect();
+
         String code = codeTb.getText();
         String task = taskTb.getText();
         String content = contentTb.getText();
-        try{
+        try {
             pst = con.prepareStatement(sql);
             pst.setString(1, code);
             pst.setString(2, task);
-            pst.setString(3,content);
+            pst.setString(3, content);
             int status = pst.executeUpdate();
 
-            if(status == 1){
-                createSuccesAlert(type);
-
+            if (status == 1) {
+                CustomAlert.createSuccesAlert(type, className);
                 loadTasks();
                 clearButton();
                 codeTb.requestFocus();
             } else {
-                createErrorAlert(type);
+                CustomAlert.createErrorAlert(type, className);
             }
-        } catch (SQLException e){
-            createErrorAlert(type);
+        } catch (SQLException e) {
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
     public void updateBt(){
         String type = "UPDATE";
         String sql = "UPDATE comments SET content=? WHERE cod=?";
-        dataBase.connect();
 
         String code = codeTb.getText();
         String cont = contentTb.getText();
@@ -272,25 +252,22 @@ public class CommentController implements Initializable
             int status = pst.executeUpdate();
 
             if(status == 1){
-                createSuccesAlert(type);
-
+                CustomAlert.createSuccesAlert(type, className);
                 loadTasks();
                 clearButton();
                 codeTb.requestFocus();
             } else {
-                createErrorAlert(type);
+                CustomAlert.createErrorAlert(type, className);
             }
         } catch (SQLException e){
-            createErrorAlert(type);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
     public void deleteComment() {
         String type = "DELETE";
         String sql = "DELETE FROM comments WHERE cod=?";
-        dataBase.connect();
 
         String code = codeTb.getText();
         try {
@@ -299,31 +276,25 @@ public class CommentController implements Initializable
             int status = pst.executeUpdate();
 
             if (status == 1) {
-                createSuccesAlert(type);
-
+                CustomAlert.createSuccesAlert(type, className);
                 allComments();
                 clearButton();
                 codeTb.requestFocus();
             } else {
-                createErrorAlert(type);
+                CustomAlert.createErrorAlert(type, className);
             }
         } catch (SQLException e) {
-            createErrorAlert(type);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
     @FXML
     private void allComments() {
-        dataBase.connect();
         refreshCommentsTable("SELECT * FROM comments ORDER BY cod");
-        dataBase.close();
     }
 
-    public void searchCommentByCodeButton()
-    {
-        dataBase.connect();
+    public void searchCommentByCodeButton() {
         refreshCommentsTable("SELECT * FROM comments WHERE cod='"+ codeTb.getText() +"'");
         ObservableList<Comment> items = commentsTv.getItems();
         if(!items.isEmpty()) {
@@ -331,37 +302,14 @@ public class CommentController implements Initializable
             loadTb();
         }
         refreshCommentsTable("SELECT * FROM comments WHERE cod='"+ codeTb.getText() +"'");
-        dataBase.close();
     }
 
-    public void searchTaskByCodeButton()
-    {
-        dataBase.connect();
+    public void searchTaskByCodeButton() {
         refreshCommentsTable("SELECT * FROM comments WHERE cod_task='"+ taskTb.getText() +"'");
         ObservableList<Comment> items = commentsTv.getItems();
         if(!items.isEmpty()) {
             actComment = items.get(0);
             loadTb();
         }
-
-        dataBase.close();
-    }
-
-    /*------------ ALERTS ------------*/
-
-    public void createErrorAlert(String type){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Fail");
-        alert.setHeaderText("TASK MANAGEMENT");
-        alert.setContentText("Task " + type + " Failed");
-        alert.showAndWait();
-    }
-
-    public void createSuccesAlert(String type){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setHeaderText("TASK MANAGEMENT");
-        alert.setContentText("Task " + type + " Successfully");
-        alert.showAndWait();
     }
 }

@@ -1,6 +1,6 @@
 package com.example.gestionproyectos.controllers;
 
-import com.example.gestionproyectos.clases.ALert;
+import com.example.gestionproyectos.clases.CustomAlert;
 import com.example.gestionproyectos.clases.Project;
 import com.example.gestionproyectos.data.dataBase;
 import javafx.collections.FXCollections;
@@ -54,7 +54,7 @@ public class ProjectController implements Initializable
             actProject = items.get(0);
             loadTb();
         }
-        else ALert.createErrorAlert("MySql Connection", className);
+        else CustomAlert.createErrorAlert("MySql Connection", className);
     }
 
     public void loadTbFromSelectedTableView() {
@@ -95,7 +95,7 @@ public class ProjectController implements Initializable
                 stateColum.setCellValueFactory(f -> f.getValue().stateProperty());
 
         } catch (Exception e){
-            ALert.createErrorAlert(type, className);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -121,16 +121,16 @@ public class ProjectController implements Initializable
             int status = pst.executeUpdate();
 
             if(status == 1){
-                ALert.createSuccesAlert(type,className);
+                CustomAlert.createSuccesAlert(type,className);
 
                 refreshTable("SELECT * FROM proyects ORDER BY cod");
                 clearButton();
                 codeTb.requestFocus();
             } else {
-                ALert.createErrorAlert(type, className);
+                CustomAlert.createErrorAlert(type, className);
             }
         } catch (SQLException e){
-            ALert.createErrorAlert(type, className);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -146,15 +146,15 @@ public class ProjectController implements Initializable
             pst.setString(4, codeTb.getText());
             int status = pst.executeUpdate();
             if(status == 1){
-                ALert.createSuccesAlert(type, className);
+                CustomAlert.createSuccesAlert(type, className);
                 refreshTable("SELECT * FROM proyects ORDER BY cod");
                 clearButton();
                 codeTb.requestFocus();
             } else {
-                ALert.createErrorAlert(type, className);
+                CustomAlert.createErrorAlert(type, className);
             }
         } catch (SQLException e){
-            ALert.createErrorAlert(type, className);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -168,15 +168,15 @@ public class ProjectController implements Initializable
             pst.setString(1, code);
             int status = pst.executeUpdate();
             if (status == 1) {
-                ALert.createSuccesAlert(type, className);
+                CustomAlert.createSuccesAlert(type, className);
                 refreshTable("SELECT * FROM proyects ORDER BY cod");
                 clearButton();
                 codeTb.requestFocus();
             } else {
-                ALert.createErrorAlert(type, className);
+                CustomAlert.createErrorAlert(type, className);
             }
         } catch (SQLException e) {
-            ALert.createErrorAlert(type, className);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }

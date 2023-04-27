@@ -38,10 +38,10 @@
       <TextField fx:id="taskTb" layoutX="55.0" layoutY="95.0" prefHeight="26.0" prefWidth="230.0" />
       <TextField fx:id="codeTb" layoutX="55.0" layoutY="64.0" prefHeight="26.0" prefWidth="230.0" />
       <Label layoutX="399.0" layoutY="14.0" text="Projects Table" />
-      <Button layoutX="16.0" layoutY="389.0" mnemonicParsing="false" onAction="#addBt" prefHeight="26.0" prefWidth="62.0" text="Add" />
-      <Button layoutX="120.0" layoutY="389.0" mnemonicParsing="false" onAction="#updateBt" prefHeight="26.0" prefWidth="62.0" text="Update" />
-      <Button layoutX="120.0" layoutY="521.0" mnemonicParsing="false" onAction="#deleteComment" prefHeight="26.0" prefWidth="62.0" text="Delete" />
-      <Button layoutX="216.0" layoutY="389.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Clear" />
+      <Button layoutX="16.0" layoutY="389.0" mnemonicParsing="false" onAction="#addBt" prefHeight="26.0" prefWidth="126.0" text="Add" />
+      <Button layoutX="160.0" layoutY="389.0" mnemonicParsing="false" onAction="#updateBt" prefHeight="26.0" prefWidth="126.0" text="Update" />
+      <Button layoutX="16.0" layoutY="432.0" mnemonicParsing="false" onAction="#deleteComment" prefHeight="26.0" prefWidth="126.0" text="Delete" />
+      <Button layoutX="160.0" layoutY="432.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="126.0" text="Clear" />
       <Button layoutX="301.0" layoutY="274.0" mnemonicParsing="false" onAction="#searchCommentByCodeButton" text="Search By code" />
       <Button layoutX="409.0" layoutY="274.0" mnemonicParsing="false" onAction="#searchTaskByCodeButton" text="Search By task" />
       <Button layoutX="814.0" layoutY="274.0" mnemonicParsing="false" onAction="#allComments" prefHeight="26.0" prefWidth="85.0" text="Show all" />

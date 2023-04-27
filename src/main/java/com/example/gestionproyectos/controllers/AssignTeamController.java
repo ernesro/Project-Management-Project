@@ -1,6 +1,6 @@
 package com.example.gestionproyectos.controllers;
 
-import com.example.gestionproyectos.clases.ALert;
+import com.example.gestionproyectos.clases.CustomAlert;
 import com.example.gestionproyectos.clases.AssignTeam;
 import com.example.gestionproyectos.clases.Project;
 import com.example.gestionproyectos.clases.Team;
@@ -72,7 +72,7 @@ public class AssignTeamController implements Initializable {
             loadTeam();
             loadProject();
         }
-        else ALert.createErrorAlert("MySql Connection",className);
+        else CustomAlert.createErrorAlert("MySql Connection",className);
     }
 
     public void loadTeam() { codeTb.setText(team.getCode()); }
@@ -99,7 +99,7 @@ public class AssignTeamController implements Initializable {
             codeTeamColum.setCellValueFactory((f -> f.getValue().codeProperty()));
             nameTeamColum.setCellValueFactory(f -> f.getValue().nameProperty());
         } catch (Exception e){
-            ALert.createErrorAlert(type,className);
+            CustomAlert.createErrorAlert(type,className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -124,7 +124,7 @@ public class AssignTeamController implements Initializable {
             tC.setCellValueFactory(f -> f.getValue().cod_teamProperty());
             pC.setCellValueFactory(f -> f.getValue().cod_projectProperty());
         } catch (Exception e){
-            ALert.createErrorAlert(type,className);
+            CustomAlert.createErrorAlert(type,className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -153,7 +153,7 @@ public class AssignTeamController implements Initializable {
             titleColum.setCellValueFactory(f -> f.getValue().titleProperty());
 
         } catch (Exception e){
-            ALert.createErrorAlert(type,className);
+            CustomAlert.createErrorAlert(type,className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -203,15 +203,15 @@ public class AssignTeamController implements Initializable {
             int status = pst.executeUpdate();
 
             if(status == 1){
-                ALert.createSuccesAlert(type,className);
+                CustomAlert.createSuccesAlert(type,className);
                 refreshAssignTable("select * from assignteam");
                 clearBt();
                 codeTb.requestFocus();
             } else {
-                ALert.createErrorAlert(type,className);
+                CustomAlert.createErrorAlert(type,className);
             }
         } catch (SQLException e){
-            ALert.createErrorAlert(type,className);
+            CustomAlert.createErrorAlert(type,className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -229,14 +229,14 @@ public class AssignTeamController implements Initializable {
             int status = pst.executeUpdate();
 
             if (status == 1) {
-                ALert.createSuccesAlert(type, className);
+                CustomAlert.createSuccesAlert(type, className);
                 clearBt();
                 codeTb.requestFocus();
             } else {
-                ALert.createErrorAlert(type, className);
+                CustomAlert.createErrorAlert(type, className);
             }
         } catch (SQLException e) {
-            ALert.createErrorAlert(type, className);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }

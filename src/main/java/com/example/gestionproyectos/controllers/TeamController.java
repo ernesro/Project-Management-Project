@@ -1,9 +1,6 @@
 package com.example.gestionproyectos.controllers;
 
-import com.example.gestionproyectos.clases.Comment;
-import com.example.gestionproyectos.clases.Project;
-import com.example.gestionproyectos.clases.Task;
-import com.example.gestionproyectos.clases.Team;
+import com.example.gestionproyectos.clases.*;
 import com.example.gestionproyectos.data.dataBase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,8 +18,8 @@ import java.util.logging.Logger;
 import static com.example.gestionproyectos.data.dataBase.con;
 import static com.example.gestionproyectos.data.dataBase.pst;
 
-public class TeamController implements Initializable
-{
+public class TeamController implements Initializable {
+    private final String className = "Team";
     Team actTeam;
 
     @FXML
@@ -45,21 +42,17 @@ public class TeamController implements Initializable
             refreshTeamsTable("SELECT * FROM teams ORDER BY cod");
             ObservableList<Team> tItems = teamsTv.getItems();
             actTeam = tItems.get(0);
-
             loadTb();
-            dataBase.close();
         }
-        else createErrorAlert("MySql Connection");
+        else CustomAlert.createErrorAlert("MySql Connection", className);
     }
 
-    public void loadTb()
-    {
+    public void loadTb() {
         codeTb.setText(actTeam.getCode());
         nameTb.setText(actTeam.getName());
     }
 
     private void refreshTeamsTable(String sql) {
-        dataBase.connect();
         String type = "SEARCH";
         ObservableList<Team> teams = FXCollections.observableArrayList();
         try{
@@ -79,55 +72,50 @@ public class TeamController implements Initializable
             }
             tCode.setCellValueFactory(f -> f.getValue().codeProperty());
             tName.setCellValueFactory(f -> f.getValue().nameProperty());
-        } catch (Exception e){
-            createErrorAlert(type);
+        } catch (Exception e) {
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
 
     /*--------------  BUTTONS  --------------*/
 
-    public void clearBt()
-    {
+    public void clearBt() {
         codeTb.setText("");
         nameTb.setText("");
     }
 
     @FXML
-    public void addBt()
-    {
+    public void addBt() {
         String type = "INSERT";
         String sql = "INSERT INTO teams(cod, name) values (?,?)";
-        dataBase.connect();
+
         String code = codeTb.getText();
         String name = nameTb.getText();
-        try{
+        try {
             pst = con.prepareStatement(sql);
             pst.setString(1, code);
-            pst.setString(2,name);
+            pst.setString(2, name);
             int status = pst.executeUpdate();
 
-            if(status == 1){
-                createSuccesAlert(type);
+            if (status == 1) {
+                CustomAlert.createSuccesAlert(type, className);
                 allTeamsButton();
                 clearBt();
                 codeTb.requestFocus();
             } else {
-                createErrorAlert(type);
+                CustomAlert.createErrorAlert(type, className);
             }
-        } catch (SQLException e){
-            createErrorAlert(type);
+        } catch (SQLException e) {
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
     public void updateBt(){
         String type = "UPDATE";
         String sql = "UPDATE teams SET name=? WHERE cod=?";
-        dataBase.connect();
 
         String code = codeTb.getText();
         String name = nameTb.getText();
@@ -140,24 +128,22 @@ public class TeamController implements Initializable
             int status = pst.executeUpdate();
 
             if(status == 1){
-                createSuccesAlert(type);
+                CustomAlert.createSuccesAlert(type, className);
                 allTeamsButton();
                 clearBt();
                 codeTb.requestFocus();
             } else {
-                createErrorAlert(type);
+                CustomAlert.createErrorAlert(type, className);
             }
         } catch (SQLException e){
-            createErrorAlert(type);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
     public void deleteBt() {
         String type = "DELETE";
         String sql = "DELETE FROM teams WHERE cod=?";
-        dataBase.connect();
         String code = codeTb.getText();
 
         try {
@@ -166,63 +152,38 @@ public class TeamController implements Initializable
             int status = pst.executeUpdate();
 
             if (status == 1) {
-                createSuccesAlert(type);
-
+                CustomAlert.createSuccesAlert(type, className);
                 allTeamsButton();
                 clearBt();
                 codeTb.requestFocus();
             } else {
-                createErrorAlert(type);
+                CustomAlert.createErrorAlert(type, className);
             }
         } catch (SQLException e) {
-            createErrorAlert(type);
+            CustomAlert.createErrorAlert(type, className);
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
-        dataBase.close();
     }
 
-    public void searchTeamByCodeButton()
-    {
-        dataBase.connect();
+    public void searchTeamByCodeButton() {
         refreshTeamsTable("SELECT * FROM teams WHERE cod='"+ codeTb.getText() +"'");
         ObservableList<Team> items = teamsTv.getItems();
         if(!items.isEmpty()) {
             actTeam = items.get(0);
             loadTb();
         }
-        dataBase.close();
     }
 
-    public void allTeamsButton()
-    {
+    public void allTeamsButton() {
         refreshTeamsTable("SELECT * FROM teams ORDER BY cod");
     }
 
     @FXML
-    public void click_TeamView()
-    {
+    public void click_TeamView() {
         Team selectedItem = (Team) teamsTv.getSelectionModel().getSelectedItem();
         if(selectedItem != null) {
             actTeam = selectedItem;
             loadTb();
         }
-    }
-
-    /*------------ ALERTS ------------*/
-
-    public void createErrorAlert(String type){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Fail");
-        alert.setHeaderText("Team MANAGEMENT");
-        alert.setContentText("Team " + type + " Failed");
-        alert.showAndWait();
-    }
-
-    public void createSuccesAlert(String type){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setHeaderText("Team MANAGEMENT");
-        alert.setContentText("Team " + type + " Successfully");
-        alert.showAndWait();
     }
 }

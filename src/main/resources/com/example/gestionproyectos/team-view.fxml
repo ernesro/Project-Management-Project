@@ -12,21 +12,21 @@
           <TableColumn fx:id="tName" prefWidth="478.39996337890625" text="Name" />
         </columns>
       </TableView>
-      <TextField fx:id="codeTb" layoutX="79.0" layoutY="59.0" prefHeight="26.0" prefWidth="206.0" />
-      <TextField fx:id="nameTb" layoutX="79.0" layoutY="96.0" prefHeight="26.0" prefWidth="206.0" />
+      <TextField fx:id="codeTb" layoutX="79.0" layoutY="80.0" prefHeight="26.0" prefWidth="206.0" />
+      <TextField fx:id="nameTb" layoutX="79.0" layoutY="131.0" prefHeight="26.0" prefWidth="206.0" />
       <Label layoutX="21.0" layoutY="14.0" text="Team">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="22.0" layoutY="63.0" text="Code" />
-      <Label layoutX="22.0" layoutY="100.0" text="Name" />
+      <Label layoutX="22.0" layoutY="85.0" text="Code" />
+      <Label layoutX="20.0" layoutY="135.0" text="Name" />
       <Label layoutX="612.0" layoutY="27.0" text="Teams table" />
       <Button layoutX="314.0" layoutY="23.0" mnemonicParsing="false" onAction="#searchTeamByCodeButton" prefHeight="26.0" prefWidth="134.0" text="Search by code" />
       <Button layoutX="841.0" layoutY="23.0" mnemonicParsing="false" onAction="#allTeamsButton" prefHeight="26.0" prefWidth="116.0" text="Show All" />
-      <Button layoutX="22.0" layoutY="188.0" mnemonicParsing="false" onAction="#addBt" prefHeight="26.0" prefWidth="72.0" text="Add Team" />
-      <Button layoutX="213.0" layoutY="188.0" mnemonicParsing="false" onAction="#clearBt" prefHeight="26.0" prefWidth="72.0" text="Clear" />
-      <Button layoutX="119.0" layoutY="188.0" mnemonicParsing="false" onAction="#updateBt" prefHeight="26.0" prefWidth="72.0" text="Update" />
-      <Button layoutX="22.0" layoutY="307.0" mnemonicParsing="false" onAction="#deleteBt" prefHeight="26.0" prefWidth="72.0" text="Delete" />
+      <Button layoutX="22.0" layoutY="188.0" mnemonicParsing="false" onAction="#addBt" prefHeight="26.0" prefWidth="123.0" text="Add Team" />
+      <Button layoutX="162.0" layoutY="231.0" mnemonicParsing="false" onAction="#clearBt" prefHeight="26.0" prefWidth="123.0" text="Clear" />
+      <Button layoutX="162.0" layoutY="188.0" mnemonicParsing="false" onAction="#updateBt" prefHeight="26.0" prefWidth="123.0" text="Update" />
+      <Button layoutX="22.0" layoutY="231.0" mnemonicParsing="false" onAction="#deleteBt" prefHeight="26.0" prefWidth="123.0" text="Delete" />
    </children>
 </AnchorPane>
