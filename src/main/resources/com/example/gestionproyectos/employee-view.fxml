@@ -20,12 +20,12 @@
         <Button fx:id="editBt" layoutX="159.0" layoutY="300.0" mnemonicParsing="false" onAction="#editBt_Click" prefHeight="26.0" prefWidth="138.0" text="Edit" />
         <Button fx:id="deleteBt" layoutX="159.0" layoutY="335.0" mnemonicParsing="false" onAction="#deleteBt_Click" prefHeight="26.0" prefWidth="138.0" text="Delete" />
         <Button fx:id="clearBt" layoutX="14.0" layoutY="335.0" mnemonicParsing="false" onAction="#clearBt_Click" prefHeight="26.0" prefWidth="138.0" text="Clear" />
-    <TextField fx:id="dniTb" layoutX="72.0" layoutY="39.0" prefHeight="26.0" prefWidth="223.0" promptText="Dni" />
-    <TextField fx:id="nameTb" layoutX="74.0" layoutY="82.0" prefHeight="26.0" prefWidth="223.0" promptText="Name" />
-    <TextField fx:id="lastNameTb" layoutX="73.0" layoutY="118.0" prefHeight="26.0" prefWidth="223.0" promptText="Surname" />
-    <TextField fx:id="emailTb" layoutX="72.0" layoutY="154.0" prefHeight="26.0" prefWidth="223.0" promptText="Email" />
-    <TextField fx:id="phoneTb" layoutX="72.0" layoutY="197.0" prefHeight="26.0" prefWidth="223.0" promptText="Phone" />
-    <TextField fx:id="addressTb" layoutX="73.0" layoutY="243.0" prefHeight="26.0" prefWidth="223.0" promptText="Address" />
+    <TextField fx:id="dniTb" layoutX="72.0" layoutY="39.0" onKeyTyped="#validateTextFields" prefHeight="26.0" prefWidth="223.0" promptText="Dni" />
+    <TextField fx:id="nameTb" layoutX="74.0" layoutY="82.0" onKeyTyped="#validateTextFields" prefHeight="26.0" prefWidth="223.0" promptText="Name" />
+    <TextField fx:id="lastNameTb" layoutX="73.0" layoutY="118.0" onKeyTyped="#validateTextFields" prefHeight="26.0" prefWidth="223.0" promptText="Surname" />
+    <TextField fx:id="emailTb" layoutX="72.0" layoutY="154.0" onKeyTyped="#validateTextFields" prefHeight="26.0" prefWidth="223.0" promptText="Email" />
+    <TextField fx:id="phoneTb" layoutX="72.0" layoutY="197.0" onKeyTyped="#validateTextFields" prefHeight="26.0" prefWidth="223.0" promptText="Phone" />
+    <TextField fx:id="addressTb" layoutX="73.0" layoutY="243.0" onKeyTyped="#validateTextFields" prefHeight="26.0" prefWidth="223.0" promptText="Address" />
     <Label layoutX="17.0" layoutY="5.0" text="Employees">
          <font>
             <Font size="24.0" />

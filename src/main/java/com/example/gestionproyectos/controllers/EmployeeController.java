@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import static com.example.gestionproyectos.data.dataBase.con;
 import static com.example.gestionproyectos.data.dataBase.pst;
@@ -27,6 +28,12 @@ public class EmployeeController extends CustomAlert implements Initializable {
     private final String className = "Employee";
     Employee employee;
 
+    @FXML
+    private Button addBt;
+    @FXML
+    private Button editBt;
+    @FXML
+    private Button deleteBt;
     @FXML
     private TextField dniTb;
     @FXML
@@ -214,6 +221,7 @@ public class EmployeeController extends CustomAlert implements Initializable {
         phoneTb.setText("");
         addressTb.setText("");
         emailTb.setText("");
+        validateTextFields();
     }
     /**
      * Method that shows all the employees in the database
@@ -226,5 +234,47 @@ public class EmployeeController extends CustomAlert implements Initializable {
      */
     public void SearchByDni_Click() {
         refreshTable("SELECT * FROM employees WHERE dni = '" + dniTb.getText() + "'");
+    }
+
+    public void validateTextFields() {
+        if ((validateDni(dniTb.getText()) && validateEmail(emailTb.getText()) && validatePhone(phoneTb.getText()))
+            && (!addressTb.getText().isEmpty() && !nameTb.getText().isEmpty() && !lastNameTb.getText().isEmpty())) {
+
+            addBt.setDisable(false);
+            editBt.setDisable(false);
+            deleteBt.setDisable(false);
+
+        } else {
+            addBt.setDisable(true);
+            editBt.setDisable(true);
+            deleteBt.setDisable(true);
+        }
+    }
+
+    public boolean validateDni(String dni){
+        String dniPattern = "^\\d{8}[A-HJ-NP-TV-Z]$";
+        if(Pattern.matches(dniPattern, dni))
+            dniTb.setStyle("-fx-border-color: green");
+        else
+            dniTb.setStyle("-fx-border-color: red");
+        return Pattern.matches(dniPattern, dni);
+    }
+
+    public boolean validateEmail(String email){
+        String emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        if(Pattern.matches(emailPattern, email))
+            emailTb.setStyle("-fx-border-color: green");
+        else
+            emailTb.setStyle("-fx-border-color: red");
+        return Pattern.matches(emailPattern, email);
+    }
+
+    public boolean validatePhone(String phone){
+        String phonePattern = "^[0-9]{9}$";
+        if(Pattern.matches(phonePattern, phone))
+            phoneTb.setStyle("-fx-border-color: green");
+        else
+            phoneTb.setStyle("-fx-border-color: red");
+        return Pattern.matches(phonePattern, phone);
     }
 }
