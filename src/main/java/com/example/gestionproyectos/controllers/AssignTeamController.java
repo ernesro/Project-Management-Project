@@ -22,7 +22,11 @@ import java.util.logging.Logger;
 
 import static com.example.gestionproyectos.data.dataBase.con;
 import static com.example.gestionproyectos.data.dataBase.pst;
-
+/**
+ * Class that controls the assign team window
+ * @version 2.0
+ * @Author Ernestas Urbonas
+ */
 public class AssignTeamController extends CustomAlert implements Initializable {
     private final String className = "Assign Team";
     private Project project;
@@ -55,7 +59,11 @@ public class AssignTeamController extends CustomAlert implements Initializable {
     private TableColumn <AssignTeam, String> pC;
 
     /*----------------LOAD DATA----------------*/
-
+    /**
+     * Method that loads the data from the database to the table
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(dataBase.connect()) {
@@ -74,10 +82,16 @@ public class AssignTeamController extends CustomAlert implements Initializable {
         }
         else CustomAlert.createErrorAlert("MySql Connection",className);
     }
-
+    /**
+     * Method that loads the data from the database to the table
+     */
     public void loadTeam() { codeTb.setText(team.getCode()); }
     public void loadProject() { projectTb.setText(project.getCode()); }
 
+    /**
+     * Method that refreshes the teams table
+     * @param sql
+     */
     private void refreshTeamsTable(String sql) {
         String type = "SEARCH";
         ObservableList<Team> teams = FXCollections.observableArrayList();
@@ -103,7 +117,10 @@ public class AssignTeamController extends CustomAlert implements Initializable {
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    /**
+     * Method that refreshes the assign team table
+     * @param sql
+     */
     private void refreshAssignTable(String sql) {
         String type = "SEARCH";
         ObservableList<AssignTeam> aTeams = FXCollections.observableArrayList();
@@ -128,12 +145,17 @@ public class AssignTeamController extends CustomAlert implements Initializable {
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    /**
+     * Method that loads the text fields
+     */
     private void loadTb() {
         projectTb.setText(project.getCode());
         codeTb.setText(team.getCode());
     }
-
+    /**
+     * Method that refreshes the project table
+     * @param sql
+     */
     public void refreshTable(String sql){
         String type = "SEARCH";
         ObservableList<Project> projects = FXCollections.observableArrayList();
@@ -158,6 +180,9 @@ public class AssignTeamController extends CustomAlert implements Initializable {
         }
     }
 
+    /**
+     * Method that loads the team data when the user clicks on the table
+     */
     @FXML
     public void click_TeamView() {
         Team selectedItem = (Team) teamsTv.getSelectionModel().getSelectedItem();
@@ -166,7 +191,9 @@ public class AssignTeamController extends CustomAlert implements Initializable {
             loadTeam();
         }
     }
-
+    /**
+     * Method that loads the assign team data when the user clicks on the table
+     */
     public void click_AssignView() {
         AssignTeam selectedItem = (AssignTeam) assigTv.getSelectionModel().getSelectedItem();
         if(selectedItem != null) {
@@ -174,7 +201,9 @@ public class AssignTeamController extends CustomAlert implements Initializable {
             projectTb.setText(selectedItem.getCod_project());
         }
     }
-
+    /**
+     * Method that loads the project data when the user clicks on the table
+     */
     public void loadTbFromSelectedTableView() {
         Project selectedItem = (Project) projTv.getSelectionModel().getSelectedItem();
         if(selectedItem != null) {
@@ -185,11 +214,17 @@ public class AssignTeamController extends CustomAlert implements Initializable {
 
     /*----------------BUTTONS----------------*/
 
+    /**
+     * Method that clears the text fields
+     */
     public void clearBt() {
         codeTb.setText("");
         projectTb.setText("");
     }
 
+    /**
+     * Method that adds a new team
+     */
     @FXML
     public void addBt() {
         String type = "INSERT";
@@ -216,6 +251,9 @@ public class AssignTeamController extends CustomAlert implements Initializable {
         }
     }
 
+    /**
+     * Method that deletes a team
+     */
     public void deleteBt() {
         String type = "DELETE";
         String sql = "DELETE FROM assignteam WHERE cod_team=? AND cod_proyect=?";
@@ -241,14 +279,21 @@ public class AssignTeamController extends CustomAlert implements Initializable {
         }
     }
 
+    /**
+     * Method that searches a project in the assign team table
+     */
     public void SearchByProjectBt() {
         refreshAssignTable("SELECT * FROM assignteam WHERE cod_proyect = '" + projectTb.getText() + "'");
     }
-
+    /**
+     * Method that searches a team in the assign team table
+     */
     public void SearchByTeam() {
         refreshAssignTable("SELECT * FROM assignteam WHERE cod_team = '" + codeTb.getText() + "'");
     }
-
+    /**
+     * Method that shows all the assign teams
+     */
     public void ShowAll() {
         refreshAssignTable("SELECT * FROM assignteam");
     }

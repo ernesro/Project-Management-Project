@@ -2,9 +2,18 @@ package com.example.gestionproyectos.clases;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-
+/**
+ * Class that represents the assignation of a task to an employee
+ * @author Ernestas Urbonas
+ * @version 2.0
+ */
 public class AssignTask
 {
+    /**
+     * Constructor of the class
+     * @param employee Employee to whom the task is assigned
+     * @param task Task assigned to the employee
+     */
     private final StringProperty employee;
     private final StringProperty task;
 

@@ -3,8 +3,21 @@ package com.example.gestionproyectos.clases;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * Class that represents a task
+ * @version 2.0
+ * @author Ernestas Urbonas
+ */
 public class Task
 {
+    /**
+     * Constructor of the class
+     * @param code string that represents the code of the task
+     * @param title string that represents the title of the task
+     * @param description string that represents the description of the task
+     * @param state string that represents the state of the task
+     * @param project string that represents the assigned project of the task
+     */
     private final javafx.beans.property.StringProperty code;
     private final javafx.beans.property.StringProperty title;
     private final javafx.beans.property.StringProperty description;

@@ -20,7 +20,11 @@ import java.util.logging.Logger;
 
 import static com.example.gestionproyectos.data.dataBase.con;
 import static com.example.gestionproyectos.data.dataBase.pst;
-
+/**
+ * Class that controls the comment window
+ * @version 2.0
+ * @Author Ernestas Urbonas
+ */
 public class CommentController extends CustomAlert implements Initializable {
     private final String className = "Comment";
     Task actTask;
@@ -60,7 +64,9 @@ public class CommentController extends CustomAlert implements Initializable {
     private TableColumn <Comment, String> cContent;
 
     /*--------------  LOAD DATA  --------------*/
-
+    /**
+     * Method that loads the data from the database to the table
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
@@ -83,6 +89,10 @@ public class CommentController extends CustomAlert implements Initializable {
         else CustomAlert.createErrorAlert("MySql Connection", className);
     }
 
+    /**
+     * Method that refresh the comments table
+     * @param sql
+     */
     private void refreshCommentsTable(String sql) {
         String type = "SEARCH";
         ObservableList<Comment> comments = FXCollections.observableArrayList();
@@ -110,6 +120,10 @@ public class CommentController extends CustomAlert implements Initializable {
         }
     }
 
+    /**
+     * Method that refresh the task table
+     * @param sql
+     */
     private void refreshTasksTable(String sql) {
         String type = "SEARCH";
         ObservableList<Task> tasks = FXCollections.observableArrayList();
@@ -137,6 +151,10 @@ public class CommentController extends CustomAlert implements Initializable {
         }
     }
 
+    /**
+     * Method that refresh the project table
+     * @param sql
+     */
     private void refreshProjectsTable(String sql) {
         String type = "SEARCH";
         ObservableList<Project> projects = FXCollections.observableArrayList();
@@ -158,22 +176,31 @@ public class CommentController extends CustomAlert implements Initializable {
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    /**
+     * Method that loads the tasks data from the database to the table
+     */
     public void loadTasks()
     {
         refreshTasksTable("SELECT * FROM tasks WHERE cod_proyect='" + actProject.getCode() +"'");
     }
-
+    /**
+     * Method that loads the comments data from the database to the table
+     */
     public void loadComments() {
         refreshCommentsTable("SELECT * FROM comments WHERE cod_task='" + actTask.getCode() +"'");
     }
-
+    /**
+     * Method that loads the data from the classes to the text fields
+     */
     public void loadTb() {
         codeTb.setText(actComment.getCode());
         contentTb.setText(actComment.getContent());
         taskTb.setText(actComment.getCod_task());
     }
 
+    /**
+     * Method  that loads the project data to the classes when user clicks on the table
+     */
     @FXML
     public void click_ProjectView() {
         Project selectedItem = (Project) projectsTv.getSelectionModel().getSelectedItem();
@@ -182,7 +209,9 @@ public class CommentController extends CustomAlert implements Initializable {
             loadTasks();
         }
     }
-
+    /**
+     * Method  that loads the task data to the classes when user clicks on the table
+     */
     @FXML
     public void click_TaskView() {
         Task selectedItem = (Task) tasksTv.getSelectionModel().getSelectedItem();
@@ -191,7 +220,9 @@ public class CommentController extends CustomAlert implements Initializable {
             loadComments();
         }
     }
-
+    /**
+     * Method  that loads the comment data to the classes when user clicks on the table
+     */
     public void click_CommentView() {
         Comment selectedItem = (Comment) commentsTv.getSelectionModel().getSelectedItem();
         if(selectedItem != null) {
@@ -201,13 +232,17 @@ public class CommentController extends CustomAlert implements Initializable {
     }
 
     /*--------------  BUTTONS  --------------*/
-
+    /**
+     * Method that clears the text fields
+     */
     public void clearButton() {
         codeTb.setText("");
         taskTb.setText("");
         contentTb.setText("");
     }
-
+    /**
+     * Method that adds a new comment to the database
+     */
     @FXML
     public void addBt() {
         String type = "INSERT";
@@ -236,7 +271,9 @@ public class CommentController extends CustomAlert implements Initializable {
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    /**
+     * Method that updates a comment from the database
+     */
     public void updateBt(){
         String type = "UPDATE";
         String sql = "UPDATE comments SET content=? WHERE cod=?";
@@ -264,7 +301,9 @@ public class CommentController extends CustomAlert implements Initializable {
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    /**
+     * Method that deletes a comment from the database
+     */
     public void deleteComment() {
         String type = "DELETE";
         String sql = "DELETE FROM comments WHERE cod=?";
@@ -289,11 +328,16 @@ public class CommentController extends CustomAlert implements Initializable {
         }
     }
 
+    /**
+     * Method that refreshes all the tables
+     */
     @FXML
     private void allComments() {
         refreshCommentsTable("SELECT * FROM comments ORDER BY cod");
     }
-
+    /**
+     * Method that searches a comment by code
+     */
     public void searchCommentByCodeButton() {
         refreshCommentsTable("SELECT * FROM comments WHERE cod='"+ codeTb.getText() +"'");
         ObservableList<Comment> items = commentsTv.getItems();
@@ -303,7 +347,9 @@ public class CommentController extends CustomAlert implements Initializable {
         }
         refreshCommentsTable("SELECT * FROM comments WHERE cod='"+ codeTb.getText() +"'");
     }
-
+    /**
+     * Method that searches a comments by task code
+     */
     public void searchTaskByCodeButton() {
         refreshCommentsTable("SELECT * FROM comments WHERE cod_task='"+ taskTb.getText() +"'");
         ObservableList<Comment> items = commentsTv.getItems();

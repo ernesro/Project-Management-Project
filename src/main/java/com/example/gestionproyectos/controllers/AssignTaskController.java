@@ -24,7 +24,11 @@ import java.util.logging.Logger;
 
 import static com.example.gestionproyectos.data.dataBase.con;
 import static com.example.gestionproyectos.data.dataBase.pst;
-
+/**
+ * Class that controls the assign task window
+ * @version 2.0
+ * @Author Ernestas Urbonas
+ */
 public class AssignTaskController extends CustomAlert implements Initializable {
     private final String className = "Task Assign";
     private Employee employee;
@@ -59,7 +63,11 @@ public class AssignTaskController extends CustomAlert implements Initializable {
     private TableColumn <AssignTask, String> assignEmployeeColumn;
 
     /*----------------LOAD DATA----------------*/
-
+    /**
+     * Method that loads the data from the database to the table
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(dataBase.connect()){
@@ -76,7 +84,10 @@ public class AssignTaskController extends CustomAlert implements Initializable {
         }
         else { CustomAlert.createErrorAlert("CONNECT",className); }
     }
-
+    /**
+     * Method that refreshes the assign task table
+     * @param sql SQL query
+     */
     private void refreshAssignTaskTable(String sql) {
         String type = "SEARCH";
 
@@ -98,7 +109,10 @@ public class AssignTaskController extends CustomAlert implements Initializable {
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    /**
+     * Method that refreshes the employee table
+     * @param sql SQL query
+     */
     private void refreshEmployeeTable(String sql) {
         String type = "SEARCH";
         ObservableList<Employee> employeeList = FXCollections.observableArrayList();
@@ -122,7 +136,10 @@ public class AssignTaskController extends CustomAlert implements Initializable {
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    /**
+     * Method that refreshes the task table
+     * @param sql SQL query
+     */
     public void refreshTaskTable(String sql) {
         String type = "SEARCH";
 
@@ -145,7 +162,9 @@ public class AssignTaskController extends CustomAlert implements Initializable {
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    /**
+     * Method that loads the assign task data when clicked on the table
+     */
     public void assignTvClick() {
         AssignTask selectedAssignTask = (AssignTask) assignTaskTv.getSelectionModel().getSelectedItem();
         if(selectedAssignTask != null){
@@ -153,7 +172,9 @@ public class AssignTaskController extends CustomAlert implements Initializable {
             taskTb.setText(selectedAssignTask.getEmployee());
         }
     }
-
+    /**
+     * Method that loads the task data when clicked on the table
+     */
     public void taskTvClick() {
         Task selectedTask = (Task) tasksTv.getSelectionModel().getSelectedItem();
         if(selectedTask != null){
@@ -162,8 +183,13 @@ public class AssignTaskController extends CustomAlert implements Initializable {
         }
     }
 
+    /**
+     * Method that loads the task data to the text field
+     */
     private void loadTask() { taskTb.setText(task.getCode()); }
-
+    /**
+     * Method that loads the employee data when clicked on the table
+     */
     public void employeesTvClick() {
         Employee selectedEmployee = (Employee) employeesTv.getSelectionModel().getSelectedItem();
         if(selectedEmployee != null){
@@ -171,11 +197,16 @@ public class AssignTaskController extends CustomAlert implements Initializable {
             loadEmployee();
         }
     }
-
+    /**
+     * Method that loads the employee data to the text field
+     */
     private void loadEmployee() { employeeTb.setText(employee.getDni()); }
 
     /*----------------BUTTONS----------------*/
 
+    /**
+     * Method that adds a new assign task to the database
+     */
     public void addBtnClick() {
         String type = "INSERT";
         String sql = "INSERT INTO assigntask (cod_task, dni) VALUES (?,?)";
@@ -201,6 +232,9 @@ public class AssignTaskController extends CustomAlert implements Initializable {
         }
     }
 
+    /**
+     * Method that deletes an assign task from the database
+     */
     public void deleteBtnClick(){
         String type = "DELETE";
         String sql = "DELETE FROM assigntask WHERE cod_task = ? AND dni = ?";
@@ -224,26 +258,39 @@ public class AssignTaskController extends CustomAlert implements Initializable {
             CustomAlert.createErrorAlert(type,className);
         }
     }
-
+    /**
+     * Method that clears the text fields
+     */
     public void clearBtnClick() {
         employeeTb.setText("");
         taskTb.setText("");
     }
-
+    /**
+     * Method that searches a task in the task table
+     */
     public void SearchInTaskTable() { refreshTaskTable("SELECT * FROM tasks WHERE cod = '" + taskTb.getText() + "'"); }
+    /**
+     * Method that searches an employee in the employee table
+     */
     public void SearchInEmployeeTable() {refreshEmployeeTable("SELECT * FROM employees WHERE dni = '" + employeeTb.getText() + "'");}
 
-
+    /**
+     * Method that refreshes all the tables
+     */
     public void ShowAllBt() {
         refreshAssignTaskTable("SELECT * FROM assigntask");
         refreshEmployeeTable("SELECT * FROM employees");
         refreshTaskTable("SELECT * FROM tasks");
     }
-
+    /**
+     * Method that searches an employee in the assign task table
+     */
     public void SearchInAssignTaskByEmployee() {
         refreshAssignTaskTable("SELECT * FROM assigntask WHERE dni = '" + employeeTb.getText() + "'");
     }
-
+    /**
+     * Method that searches a task in the assign task table
+     */
     public void SearchInAssignTaskByTask() {
         refreshAssignTaskTable("SELECT * FROM assigntask WHERE cod_task = '" + taskTb.getText() + "'");
     }

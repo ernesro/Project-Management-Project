@@ -1,9 +1,18 @@
 package com.example.gestionproyectos.clases;
 
 import javafx.beans.property.SimpleStringProperty;
-
+/**
+ * Class that represents the assignation of a team to a project
+ * @version 2.0
+ * @Author Ernestas Urbonas
+ */
 public class AssignTeam
 {
+    /**
+     * Constructor of the class
+     * @param cod_team Team assigned to the project
+     * @param cod_project Project to which the team is assigned
+     */
     private final javafx.beans.property.StringProperty cod_team;
     private final javafx.beans.property.StringProperty cod_project;
 

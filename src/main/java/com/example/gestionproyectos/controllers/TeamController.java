@@ -17,7 +17,11 @@ import java.util.logging.Logger;
 
 import static com.example.gestionproyectos.data.dataBase.con;
 import static com.example.gestionproyectos.data.dataBase.pst;
-
+/**
+ * Class that controls the team window
+ * @version 2.0
+ * @Author Ernestas Urbonas
+ */
 public class TeamController extends CustomAlert implements Initializable {
     private final String className = "Team";
     Team actTeam;
@@ -35,7 +39,11 @@ public class TeamController extends CustomAlert implements Initializable {
     private TableColumn <Team, String> tCode;
 
     /*--------------  LOAD DATA  --------------*/
-
+    /**
+     * Method that loads the data from the database
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(dataBase.connect()) {
@@ -47,11 +55,18 @@ public class TeamController extends CustomAlert implements Initializable {
         else CustomAlert.createErrorAlert("MySql Connection", className);
     }
 
+    /**
+     * Method that loads the text fields with the class data
+     */
     public void loadTb() {
         codeTb.setText(actTeam.getCode());
         nameTb.setText(actTeam.getName());
     }
 
+    /**
+     * Method that refreshes the table with the data from the database
+     * @param sql
+     */
     private void refreshTeamsTable(String sql) {
         String type = "SEARCH";
         ObservableList<Team> teams = FXCollections.observableArrayList();
@@ -81,11 +96,17 @@ public class TeamController extends CustomAlert implements Initializable {
 
     /*--------------  BUTTONS  --------------*/
 
+    /**
+     * Method that clears the text fields
+     */
     public void clearBt() {
         codeTb.setText("");
         nameTb.setText("");
     }
 
+    /**
+     * Method that adds a new team to the database
+     */
     @FXML
     public void addBt() {
         String type = "INSERT";
@@ -113,6 +134,9 @@ public class TeamController extends CustomAlert implements Initializable {
         }
     }
 
+    /**
+     * Method that updates the team data in the database
+     */
     public void updateBt(){
         String type = "UPDATE";
         String sql = "UPDATE teams SET name=? WHERE cod=?";
@@ -141,6 +165,9 @@ public class TeamController extends CustomAlert implements Initializable {
         }
     }
 
+    /**
+     * Method that deletes the team from the database
+     */
     public void deleteBt() {
         String type = "DELETE";
         String sql = "DELETE FROM teams WHERE cod=?";
@@ -165,6 +192,9 @@ public class TeamController extends CustomAlert implements Initializable {
         }
     }
 
+    /**
+     * Method that searches the team by the code
+     */
     public void searchTeamByCodeButton() {
         refreshTeamsTable("SELECT * FROM teams WHERE cod='"+ codeTb.getText() +"'");
         ObservableList<Team> items = teamsTv.getItems();
@@ -174,10 +204,16 @@ public class TeamController extends CustomAlert implements Initializable {
         }
     }
 
+    /**
+     * Method that shows all teams
+     */
     public void allTeamsButton() {
         refreshTeamsTable("SELECT * FROM teams ORDER BY cod");
     }
 
+    /**
+     * Method that loads team when clicked on the table
+     */
     @FXML
     public void click_TeamView() {
         Team selectedItem = (Team) teamsTv.getSelectionModel().getSelectedItem();

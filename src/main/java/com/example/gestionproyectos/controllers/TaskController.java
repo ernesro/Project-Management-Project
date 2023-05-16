@@ -19,7 +19,11 @@ import java.util.logging.Logger;
 
 import static com.example.gestionproyectos.data.dataBase.con;
 import static com.example.gestionproyectos.data.dataBase.pst;
-
+/**
+ * Class that controls the task window
+ * @version 2.0
+ * @Author Ernestas Urbonas
+ */
 public class TaskController extends CustomAlert implements Initializable {
     private final String className = "Task";
     Task actTask;
@@ -58,7 +62,11 @@ public class TaskController extends CustomAlert implements Initializable {
     private TableColumn <Task, String> tCodeColum;
 
     /*--------  LOAD DATA  --------*/
-
+    /**
+     * Method that loads the data from the database
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         descTb.setWrapText(true);
@@ -76,6 +84,10 @@ public class TaskController extends CustomAlert implements Initializable {
         else CustomAlert.createErrorAlert("MySql Connection", className);
     }
 
+    /**
+     * Method that refresh the project table
+     * @param sql
+     */
     public void refreshProjectTable(String sql) {
         String type = "SEARCH";
         ObservableList<Project> projects = FXCollections.observableArrayList();
@@ -97,7 +109,10 @@ public class TaskController extends CustomAlert implements Initializable {
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    /**
+     * Method that refresh the task table
+     * @param sql
+     */
     public void refreshTaskTable(String sql) {
         String type = "SEARCH";
         ObservableList<Task> tasks = FXCollections.observableArrayList();
@@ -129,6 +144,9 @@ public class TaskController extends CustomAlert implements Initializable {
         }
     }
 
+    /**
+     * Method that loads the text fields from the class
+     */
     public void loadTb() {
         codeTb.setText(actTask.getCode());
         descTb.setText(actTask.getDescription());
@@ -137,16 +155,24 @@ public class TaskController extends CustomAlert implements Initializable {
         stateLb.setText(actTask.getState());
     }
 
+    /**
+     * Method that loads the tasks from the database
+     */
     public void loadTasks() {
         refreshTaskTable("SELECT * FROM tasks WHERE cod_proyect='" + actProject.getCode() +"'");
     }
-
+    /**
+     * Method that loads the projects from the database
+     */
     public void loadProjects() {
         refreshProjectTable("SELECT * FROM proyects WHERE cod='" + actTask.getProject() +"'");
     }
 
     /*-----------   BUTTONS   -----------*/
 
+    /**
+     * Method that clears the text fields
+     */
     public void clearButton() {
         codeTb.setText("");
         descTb.setText("");
@@ -155,6 +181,9 @@ public class TaskController extends CustomAlert implements Initializable {
         prjtTb.setText("");
     }
 
+    /**
+     * Method that adds a new task to the database
+     */
     @FXML
     public void addTask() {
         String type = "INSERT";
@@ -189,6 +218,9 @@ public class TaskController extends CustomAlert implements Initializable {
         }
     }
 
+    /**
+     * Method that updates a task from the database
+     */
     @FXML
     public void updateTask(){
         String type = "UPDATE";
@@ -221,7 +253,9 @@ public class TaskController extends CustomAlert implements Initializable {
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    /**
+     * Method that deletes a task from the database
+     */
     public void deleteTask() {
         String type = "DELETE";
         String sql = "DELETE FROM tasks WHERE cod=?";
@@ -248,6 +282,9 @@ public class TaskController extends CustomAlert implements Initializable {
         }
     }
 
+    /**
+     * Method that loads project data when a project is selected
+     */
     @FXML
     public void click_ProjectView() {
         Project selectedItem = (Project) projetTv.getSelectionModel().getSelectedItem();
@@ -257,7 +294,9 @@ public class TaskController extends CustomAlert implements Initializable {
             loadTb();
         }
     }
-
+    /**
+     * Method that loads task data when a task is selected
+     */
     @FXML
     public void click_TaskView() {
         Task selectedItem = (Task) taskTv.getSelectionModel().getSelectedItem();
@@ -267,6 +306,9 @@ public class TaskController extends CustomAlert implements Initializable {
         }
     }
 
+    /**
+     * Method that searches a project by code
+     */
     @FXML
     public void searchProjectByCodeButton() {
         refreshProjectTable("SELECT * FROM proyects WHERE cod='"+ prjtTb.getText() +"'");
@@ -277,7 +319,9 @@ public class TaskController extends CustomAlert implements Initializable {
         }
         loadTasks();
     }
-
+    /**
+     * Method that searches a task by code
+     */
     public void searchTaskByCodeButton()
     {
         refreshTaskTable("SELECT * FROM tasks WHERE cod='"+ codeTb.getText() +"'");
@@ -289,20 +333,34 @@ public class TaskController extends CustomAlert implements Initializable {
         loadProjects();
     }
 
+    /**
+     * Method that shows all the tasks
+     */
     @FXML
     private void allTasksButton() {
         refreshTaskTable("SELECT * FROM tasks ORDER BY cod");
     }
-
+    /**
+     * Method that shows all the projects
+     */
     @FXML
     private void allProjectsButton() {
         refreshProjectTable("SELECT * FROM proyects ORDER BY cod");
     }
 
+    /**
+     * Method that sets the state of the task to in progress
+     */
     @FXML
     public void setStateInProgress() {stateLb.setText("in progress");}
+    /**
+     * Method that sets the state of the task to on hold
+     */
     @FXML
     public void setStateOnHold() {stateLb.setText("not started");}
+    /**
+     * Method that sets the state of the task to completed
+     */
     @FXML
     public void setStateCompleted() {stateLb.setText("completed");}
 }

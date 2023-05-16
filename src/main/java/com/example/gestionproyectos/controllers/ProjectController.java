@@ -17,7 +17,11 @@ import java.util.logging.Logger;
 
 import static com.example.gestionproyectos.data.dataBase.con;
 import static com.example.gestionproyectos.data.dataBase.pst;
-
+/**
+ * Class that controls the project window
+ * @version 2.0
+ * @Author Ernestas Urbonas
+ */
 public class ProjectController extends CustomAlert implements Initializable
 {
     private final String className = "Project";
@@ -44,7 +48,11 @@ public class ProjectController extends CustomAlert implements Initializable
     private TableColumn <Project, String> stateColum;
 
     /*-------------- LOAD DATA --------------*/
-
+    /**
+     * Method that loads the data from the database
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         descTb.setWrapText(true);
@@ -57,6 +65,9 @@ public class ProjectController extends CustomAlert implements Initializable
         else CustomAlert.createErrorAlert("MySql Connection", className);
     }
 
+    /**
+     * Method that loads the project from the selected cell on the table view
+     */
     public void loadTbFromSelectedTableView() {
         Project selectedItem = (Project) projTb.getSelectionModel().getSelectedItem();
         if(selectedItem != null) {
@@ -65,13 +76,19 @@ public class ProjectController extends CustomAlert implements Initializable
         }
     }
 
+    /**
+     * Method that loads the text fields with the data from the project
+     */
     public void loadTb() {
         codeTb.setText(actProject.getCode());
         descTb.setText(actProject.getDescription());
         tltTb.setText(actProject.getTitle());
         stateLb.setText(actProject.getState());
     }
-
+    /**
+     * Method that refreshes the project table view with the data from the database
+     * @param sql
+     */
     public void refreshTable(String sql){
         String type = "SEARCH";
         ObservableList<Project> projects = FXCollections.observableArrayList();
@@ -101,7 +118,9 @@ public class ProjectController extends CustomAlert implements Initializable
     }
 
     /*-----------  BUTTONS  --------------*/
-
+    /**
+     * Method that clears the text fields
+     */
     public void clearButton() {
         codeTb.setText("");
         descTb.setText("");
@@ -109,6 +128,9 @@ public class ProjectController extends CustomAlert implements Initializable
         stateLb.setText("");
     }
 
+    /**
+     * Method that adds a new project to the database
+     */
     public void addButton() {
         String type = "INSERT";
         String sql = "INSERT INTO proyects(cod, title, description, state) values (?,?,?,?)";
@@ -135,6 +157,9 @@ public class ProjectController extends CustomAlert implements Initializable
         }
     }
 
+    /**
+     * Method that updates the project on the database
+     */
     public void updateButton() {
         String type = "UPDATE";
         String sql = "UPDATE proyects SET title=?, description=?, state=? WHERE cod=?";
@@ -159,6 +184,9 @@ public class ProjectController extends CustomAlert implements Initializable
         }
     }
 
+    /**
+     * Method that deletes the project from the database
+     */
     public void deleteButton() {
         String type = "DELETE";
         String sql = "DELETE FROM proyects WHERE cod=?";
@@ -180,7 +208,9 @@ public class ProjectController extends CustomAlert implements Initializable
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    /**
+     * Method that searches the project by code
+     */
     public void searchByCodeButton() {
         refreshTable("SELECT * FROM proyects WHERE cod='"+ codeTb.getText() +"'");
         ObservableList<Project> items = projTb.getItems();
@@ -189,11 +219,22 @@ public class ProjectController extends CustomAlert implements Initializable
             loadTb();
         }
     }
-
+    /**
+     * Method that shows all projects
+     */
     @FXML
     private void allButton() { refreshTable("SELECT * FROM proyects ORDER BY cod"); }
 
+    /**
+     * Method that sets the state of the project to in progress
+     */
     public void setStateInProgress() {stateLb.setText("in progress");}
+    /**
+     * Method that sets the state of the project to on hold
+     */
     public void setStateOnHold() {stateLb.setText("on hold");}
+    /**
+     * Method that sets the state of the project to completed
+     */
     public void setStateCompleted() {stateLb.setText("completed");}
 }

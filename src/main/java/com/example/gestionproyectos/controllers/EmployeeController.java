@@ -17,7 +17,11 @@ import java.util.logging.Logger;
 
 import static com.example.gestionproyectos.data.dataBase.con;
 import static com.example.gestionproyectos.data.dataBase.pst;
-
+/**
+ * Class that controls the employee window
+ * @version 2.0
+ * @Author Ernestas Urbonas
+ */
 public class EmployeeController extends CustomAlert implements Initializable {
 
     private final String className = "Employee";
@@ -53,7 +57,9 @@ public class EmployeeController extends CustomAlert implements Initializable {
 
 
     /*-------------- LOAD DATA --------------*/
-
+    /**
+     * Method that loads the data from the database to the table
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (dataBase.connect()) {
@@ -65,6 +71,9 @@ public class EmployeeController extends CustomAlert implements Initializable {
         else CustomAlert.createErrorAlert("MySql Connection", className);
     }
 
+    /**
+     * Method that loads the text fields with the data from the classes
+     */
     public void loadTb(){
         dniTb.setText(employee.getDni());
         lastNameTb.setText(employee.getLastname());
@@ -74,6 +83,9 @@ public class EmployeeController extends CustomAlert implements Initializable {
         emailTb.setText(employee.getEmail());
     }
 
+    /**
+     * Method that loads employee data from the class when the table is clicked
+     */
     public void clickOnTableView(){
         Employee selectedItem = (Employee) employeesTv.getSelectionModel().getSelectedItem();
         if(selectedItem != null) {
@@ -82,6 +94,10 @@ public class EmployeeController extends CustomAlert implements Initializable {
         }
     }
 
+    /**
+     * Methodthat refreshes the employees table with the data from the database
+     * @param sql
+     */
     public void refreshTable(String sql){
         String type = "Search";
         ObservableList<Employee> items = FXCollections.observableArrayList();
@@ -114,7 +130,9 @@ public class EmployeeController extends CustomAlert implements Initializable {
     }
 
     /*-------------- BUTTONS --------------*/
-
+    /**
+     * Method that adds a new employee to the database
+     */
     public void addBt_Click() {
         String type = "Insert";
         String sql = "INSERT INTO employees (dni, lastName, name, phoneNumber, address, email) VALUES (?,?,?,?,?,?)";
@@ -139,6 +157,9 @@ public class EmployeeController extends CustomAlert implements Initializable {
         }
     }
 
+    /**
+     * Method that updates the employee data in the database
+     */
     public void editBt_Click() {
         String type = "Update";
         String sql = "UPDATE employees SET lastName = ?, name = ?, phoneNumber = ?, address = ?, email = ? WHERE dni = ?";
@@ -162,7 +183,9 @@ public class EmployeeController extends CustomAlert implements Initializable {
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    /**
+     * Method that deletes an employee from the database
+     */
     public void deleteBt_Click() {
         String type = "Delete";
         String sql = "DELETE FROM employees WHERE dni = ?";
@@ -181,7 +204,9 @@ public class EmployeeController extends CustomAlert implements Initializable {
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    /**
+     * Method that clears the text fields
+     */
     public void clearBt_Click() {
         dniTb.setText("");
         nameTb.setText("");
@@ -190,11 +215,15 @@ public class EmployeeController extends CustomAlert implements Initializable {
         addressTb.setText("");
         emailTb.setText("");
     }
-
+    /**
+     * Method that shows all the employees in the database
+     */
     public void ShowAllBt_Click() {
         refreshTable("SELECT * FROM employees ORDER BY dni");
     }
-
+    /**
+     * Method that searches an employee by dni
+     */
     public void SearchByDni_Click() {
         refreshTable("SELECT * FROM employees WHERE dni = '" + dniTb.getText() + "'");
     }

@@ -1,9 +1,19 @@
 package com.example.gestionproyectos.clases;
 
 import javafx.beans.property.SimpleStringProperty;
-
+/**
+ * Class that represents the assignation of a team to a project
+ * @version 2.0
+ * @Author Ernestas Urbonas
+ */
 public class Comment
 {
+    /**
+     * Constructor of the class
+     * @param code string that represents the code of the comment
+     * @param cod_task string that represents the code of the task to which the comment is assigned
+     * @param content string that represents the content of the comment
+     */
     private final javafx.beans.property.StringProperty code;
     private final javafx.beans.property.StringProperty content;
     private final javafx.beans.property.StringProperty cod_task;

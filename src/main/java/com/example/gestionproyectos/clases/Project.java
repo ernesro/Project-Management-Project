@@ -1,8 +1,21 @@
 package com.example.gestionproyectos.clases;
 
 import javafx.beans.property.SimpleStringProperty;
+
+/**
+ * Class that represents a project
+ * @version 2.0
+ * @Author Ernestas Urbonas
+ */
 public class Project
 {
+    /**
+     * Constructor of the class
+     * @param code string that represents the code of the project
+     * @param title string that represents the title of the project
+     * @param description string that represents the description of the project
+     * @param state string that represents the state of the project
+     */
     private final javafx.beans.property.StringProperty code;
     private final javafx.beans.property.StringProperty title;
     private final javafx.beans.property.StringProperty description;

@@ -22,7 +22,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static com.example.gestionproyectos.data.dataBase.*;
-
+/**
+ * Class that controls the assign employee window
+ * @version 2.0
+ * @Author Ernestas Urbonas
+ */
 public class AssignEmployeeController extends dataBase implements Initializable {
     private final String className = "Employee Assign";
     private Team team;
@@ -59,7 +63,11 @@ public class AssignEmployeeController extends dataBase implements Initializable 
     private TableColumn<AssignEmployee, String> assignTeamColumn;
 
     /*------------LOAD DATA-------------*/
-
+    /**
+     * Method that loads the data from the database
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if(dataBase.connect()){
@@ -75,7 +83,10 @@ public class AssignEmployeeController extends dataBase implements Initializable 
         }
         else{ CustomAlert.createErrorAlert("MySql Connection", className); }
     }
-
+    /**
+     * Method that refresh employees data from the database
+     * @param sql
+     */
     public void refreshEmployees(String sql){
         String type = "SEARCH";
         ObservableList<Employee> employees = FXCollections.observableArrayList();
@@ -100,7 +111,10 @@ public class AssignEmployeeController extends dataBase implements Initializable 
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    /**
+     * Method that refresh teams data from the database
+     * @param sql
+     */
     public void refreshTeams(String sql){
         String type = "SEARCH";
         ObservableList<Team> teams = FXCollections.observableArrayList();
@@ -122,6 +136,10 @@ public class AssignEmployeeController extends dataBase implements Initializable 
         }
     }
 
+    /**
+     * Method that refresh the assigned employee data from the database
+     * @param sql
+     */
     public void refreshAssignEmployee(String sql){
         String type = "SEARCH";
         ObservableList<AssignEmployee> assignEmployees = FXCollections.observableArrayList();
@@ -143,6 +161,9 @@ public class AssignEmployeeController extends dataBase implements Initializable 
         }
     }
 
+    /**
+     * Method that that loads the employee data to the text field
+     */
     public void employeeClick(){
         Employee selectedEmployee = (Employee) employeesTv.getSelectionModel().getSelectedItem();
         if(selectedEmployee != null){
@@ -156,7 +177,9 @@ public class AssignEmployeeController extends dataBase implements Initializable 
         employeeTb.setText(employee.getDni());
     }
 
-
+    /**
+     * Method that that loads the team data to the text field
+     */
     public void teamClick() {
         Team selectedTeam = (Team) teamsTv.getSelectionModel().getSelectedItem();
         if(selectedTeam != null){
@@ -169,7 +192,9 @@ public class AssignEmployeeController extends dataBase implements Initializable 
     private void loadTeam() {
         teamTb.setText(team.getCode());
     }
-
+    /**
+     * Method that that loads the assigned employee data to the text field
+     */
     public void assignEmployeeTeam() {
         AssignEmployee selectedAssignEmployee = (AssignEmployee) assignEmployeeTv.getSelectionModel().getSelectedItem();
         if(selectedAssignEmployee != null){
@@ -179,7 +204,9 @@ public class AssignEmployeeController extends dataBase implements Initializable 
     }
 
     /*------------BUTTONS-------------*/
-
+    /**
+     * Method that adds an assigned employee to the database
+     */
     public void addAssignEmployee(){
         String type = "INSERT";
         String sql = "INSERT INTO assignemployee (dni, cod_team) VALUES ('" + employeeTb.getText() + "', '" + teamTb.getText() + "')";
@@ -196,20 +223,29 @@ public class AssignEmployeeController extends dataBase implements Initializable 
             Logger.getLogger(ProjectController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    /**
+     * Method that searches an employee in the employees table
+     */
     public void searchEmployeeInEmployeesBt() {
         refreshEmployees("SELECT * FROM employees WHERE dni = '" + employeeTb.getText() + "'");
     }
-
+    /**
+     * Method that searches a team in the teams table
+     */
     public void searchTeamInTeams() {
         refreshTeams("SELECT * FROM teams WHERE cod = '" + teamTb.getText() + "'");
     }
 
+    /**
+     * Method that clears the text fields
+     */
     public void clearBt() {
         employeeTb.setText("");
         teamTb.setText("");
     }
-
+    /**
+     * Method that deletes an assigned employee from the database
+     */
     public void deleteBt() {
         String type = "DELETE";
         String sql = "DELETE FROM assignemployee WHERE dni = '" + employeeTb.getText() + "' AND cod_team = '" + teamTb.getText() + "'";
@@ -227,14 +263,21 @@ public class AssignEmployeeController extends dataBase implements Initializable 
         }
     }
 
+    /**
+     * Method thatsearches a team in the assign employee table
+     */
     public void searchByTeamBt() {
         refreshAssignEmployee("SELECT * FROM assignemployee WHERE cod_team = '" + teamTb.getText() + "'");
     }
-
+    /**
+     * Method that searches an employee in the assign employee table
+     */
     public void searchByEmployeeBt() {
         refreshAssignEmployee("SELECT * FROM assignemployee WHERE dni = '" + employeeTb.getText() + "'");
     }
-
+    /**
+     * Method that shows all the data from the database
+     */
     public void showAllBt() {
         refreshEmployees("SELECT * FROM employees");
         refreshTeams("SELECT * FROM teams");

@@ -1,9 +1,22 @@
 package com.example.gestionproyectos.clases;
 
 import javafx.beans.value.ObservableValue;
-
+/**
+ * Class that represents an employee
+ * @version 2.0
+ * @Author Ernestas Urbonas
+ */
 public class Employee
 {
+    /**
+     * Constructor of the class
+     * @param dni string that represents the dni of the employee
+     * @param name string that represents the name of the employee
+     * @param lastname string that represents the lastname of the employee
+     * @param email string that represents the email of the employee
+     * @param phone string that represents the phone of the employee
+     * @param address string that represents the address of the employee
+     */
     private final javafx.beans.property.StringProperty dni;
     private final javafx.beans.property.StringProperty name;
     private final javafx.beans.property.StringProperty lastname;
