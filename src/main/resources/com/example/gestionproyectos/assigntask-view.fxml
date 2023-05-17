@@ -35,12 +35,12 @@
       </Label>
       <Label layoutX="14.0" layoutY="87.0" text="Dni" />
       <Label layoutX="11.0" layoutY="176.0" text="Task" />
-      <TextField fx:id="employeeTb" layoutX="66.0" layoutY="83.0" prefHeight="26.0" prefWidth="240.0" />
+      <TextField fx:id="employeeTb" layoutX="66.0" layoutY="83.0" onKeyTyped="#validateTextFields" prefHeight="26.0" prefWidth="240.0" />
       <TextField fx:id="taskTb" layoutX="66.0" layoutY="172.0" prefHeight="26.0" prefWidth="240.0" />
-      <Button layoutX="12.0" layoutY="296.0" mnemonicParsing="false" onAction="#addBtnClick" prefHeight="26.0" prefWidth="128.0" text="Add" />
-      <Button layoutX="178.0" layoutY="335.0" mnemonicParsing="false" onAction="#clearBtnClick" prefHeight="26.0" prefWidth="128.0" text="Clear" />
+      <Button fx:id="addBt" layoutX="12.0" layoutY="296.0" mnemonicParsing="false" onAction="#addBtnClick" onKeyTyped="#validateTextFields" prefHeight="26.0" prefWidth="128.0" text="Add" />
+      <Button layoutX="178.0" layoutY="335.0" mnemonicParsing="false" onAction="#clearBtnClick" onMouseClicked="#validateTextFields" prefHeight="26.0" prefWidth="128.0" text="Clear" />
       <Button layoutX="66.0" layoutY="208.0" mnemonicParsing="false" onAction="#SearchInTaskTable" prefHeight="26.0" prefWidth="240.0" text="Search Task " />
-      <Button layoutX="12.0" layoutY="335.0" mnemonicParsing="false" onAction="#deleteBtnClick" prefHeight="26.0" prefWidth="128.0" text="Delete" />
+      <Button fx:id="deleteBt" layoutX="12.0" layoutY="335.0" mnemonicParsing="false" onAction="#deleteBtnClick" onKeyTyped="#validateTextFields" prefHeight="26.0" prefWidth="128.0" text="Delete" />
       <Button layoutX="178.0" layoutY="554.0" mnemonicParsing="false" onAction="#SearchInAssignTaskByTask" prefHeight="26.0" prefWidth="128.0" text="Search by task" />
       <Button layoutX="178.0" layoutY="513.0" mnemonicParsing="false" onAction="#SearchInAssignTaskByEmployee" prefHeight="26.0" prefWidth="128.0" text="Search by Employee" />
       <Button layoutX="178.0" layoutY="475.0" mnemonicParsing="false" onAction="#ShowAllBt" prefHeight="26.0" prefWidth="128.0" text="Show All" />

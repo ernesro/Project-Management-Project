@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -21,6 +22,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import static com.example.gestionproyectos.data.dataBase.con;
 import static com.example.gestionproyectos.data.dataBase.pst;
@@ -38,6 +40,11 @@ public class AssignTaskController extends CustomAlert implements Initializable {
     private TextField employeeTb;
     @FXML
     private TextField taskTb;
+
+    @FXML
+    private Button addBt;
+    @FXML
+    private Button deleteBt;
 
     @FXML
     private TableView tasksTv;
@@ -293,5 +300,24 @@ public class AssignTaskController extends CustomAlert implements Initializable {
      */
     public void SearchInAssignTaskByTask() {
         refreshAssignTaskTable("SELECT * FROM assigntask WHERE cod_task = '" + taskTb.getText() + "'");
+    }
+
+    public void validateTextFields() {
+        if (validateDni(employeeTb.getText())) {
+            addBt.setDisable(false);
+            deleteBt.setDisable(false);
+
+        } else {
+            addBt.setDisable(true);
+            deleteBt.setDisable(true);
+        }
+    }
+    public boolean validateDni(String dni){
+        String dniPattern = "^\\d{8}[A-HJ-NP-TV-Z]$";
+        if(Pattern.matches(dniPattern, dni))
+            employeeTb.setStyle("-fx-border-color: green");
+        else
+            employeeTb.setStyle("-fx-border-color: red");
+        return Pattern.matches(dniPattern, dni);
     }
 }

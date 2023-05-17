@@ -36,13 +36,13 @@
       </Label>
       <Label layoutX="14.0" layoutY="78.0" text="Employee" />
       <Label layoutX="14.0" layoutY="181.0" text="Team" />
-      <TextField fx:id="employeeTb" layoutX="81.0" layoutY="74.0" prefHeight="26.0" prefWidth="181.0" />
+      <TextField fx:id="employeeTb" layoutX="81.0" layoutY="74.0" onKeyTyped="#validateTextFields" prefHeight="26.0" prefWidth="181.0" />
       <TextField fx:id="teamTb" layoutX="80.0" layoutY="177.0" prefHeight="26.0" prefWidth="182.0" />
       <Button layoutX="81.0" layoutY="110.0" mnemonicParsing="false" onAction="#searchEmployeeInEmployeesBt" prefHeight="26.0" prefWidth="182.0" text="Search in Employees table" />
       <Button layoutX="80.0" layoutY="217.0" mnemonicParsing="false" onAction="#searchTeamInTeams" prefHeight="26.0" prefWidth="182.0" text="Search in Teams table" />
-      <Button layoutX="14.0" layoutY="335.0" mnemonicParsing="false" onAction="#addAssignEmployee" prefHeight="26.0" prefWidth="109.0" text="Add" />
-      <Button layoutX="153.0" layoutY="335.0" mnemonicParsing="false" onAction="#clearBt" prefHeight="26.0" prefWidth="109.0" text="Clear" />
-      <Button layoutX="14.0" layoutY="372.0" mnemonicParsing="false" onAction="#deleteBt" prefHeight="26.0" prefWidth="109.0" text="Delete" />
+      <Button fx:id="addBt" layoutX="14.0" layoutY="335.0" mnemonicParsing="false" onAction="#addAssignEmployee" prefHeight="26.0" prefWidth="109.0" text="Add" />
+      <Button layoutX="153.0" layoutY="335.0" mnemonicParsing="false" onAction="#clearBt" onMouseClicked="#validateTextFields" prefHeight="26.0" prefWidth="109.0" text="Clear" />
+      <Button fx:id="deleteBt" layoutX="14.0" layoutY="372.0" mnemonicParsing="false" onAction="#deleteBt" prefHeight="26.0" prefWidth="109.0" text="Delete" />
       <Button layoutX="137.0" layoutY="558.0" mnemonicParsing="false" onAction="#searchByTeamBt" prefHeight="26.0" prefWidth="126.0" text="Search by Team" />
       <Button layoutX="137.0" layoutY="524.0" mnemonicParsing="false" onAction="#searchByEmployeeBt" prefHeight="26.0" prefWidth="126.0" text="Search by Employee" />
       <Button layoutX="137.0" layoutY="489.0" mnemonicParsing="false" onAction="#showAllBt" prefHeight="26.0" prefWidth="126.0" text="Show All" />
