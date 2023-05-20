@@ -22,7 +22,7 @@ public class Application extends javafx.application.Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        WindowFXML window = new WindowFXML("welcome-view.fxml", 600, 400);
+        WindowFXML window = new WindowFXML("login-view.fxml", 351, 400);
         window.showAndWait();
     }
     /**

@@ -27,7 +27,7 @@ import static com.example.gestionproyectos.data.dataBase.pst;
  * @version 2.0
  * @Author Ernestas Urbonas
  */
-public class AssignTeamController extends CustomAlert implements Initializable {
+public class AssignTeamController implements Initializable {
     private final String className = "Assign Team";
     private Project project;
     private Team team;

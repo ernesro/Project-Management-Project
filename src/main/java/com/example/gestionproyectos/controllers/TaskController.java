@@ -24,7 +24,7 @@ import static com.example.gestionproyectos.data.dataBase.pst;
  * @version 2.0
  * @Author Ernestas Urbonas
  */
-public class TaskController extends CustomAlert implements Initializable {
+public class TaskController implements Initializable {
     private final String className = "Task";
     Task actTask;
     Project actProject;

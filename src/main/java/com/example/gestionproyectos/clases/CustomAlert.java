@@ -7,7 +7,7 @@ import javafx.scene.control.Alert;
  * @version 2.0
  * @Author Ernestas Urbonas
  */
-public class CustomAlert extends AssignEmployeeController {
+public class CustomAlert {
     /**
      * Method that creates an Error Alert
      * @param type string that represents the type of alert

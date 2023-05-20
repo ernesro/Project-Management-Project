@@ -25,7 +25,7 @@ import static com.example.gestionproyectos.data.dataBase.pst;
  * @version 2.0
  * @Author Ernestas Urbonas
  */
-public class CommentController extends CustomAlert implements Initializable {
+public class CommentController implements Initializable {
     private final String className = "Comment";
     Task actTask;
     Project actProject;

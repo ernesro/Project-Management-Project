@@ -29,7 +29,7 @@ import static com.example.gestionproyectos.data.dataBase.*;
  * @version 2.0
  * @Author Ernestas Urbonas
  */
-public class AssignEmployeeController extends dataBase implements Initializable {
+public class AssignEmployeeController implements Initializable {
     private final String className = "Employee Assign";
     private Team team;
     private Employee employee;

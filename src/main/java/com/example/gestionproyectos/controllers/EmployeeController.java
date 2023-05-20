@@ -23,7 +23,7 @@ import static com.example.gestionproyectos.data.dataBase.pst;
  * @version 2.0
  * @Author Ernestas Urbonas
  */
-public class EmployeeController extends CustomAlert implements Initializable {
+public class EmployeeController implements Initializable {
 
     private final String className = "Employee";
     Employee employee;

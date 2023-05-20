@@ -31,7 +31,7 @@ import static com.example.gestionproyectos.data.dataBase.pst;
  * @version 2.0
  * @Author Ernestas Urbonas
  */
-public class AssignTaskController extends CustomAlert implements Initializable {
+public class AssignTaskController implements Initializable {
     private final String className = "Task Assign";
     private Employee employee;
     private Task task;
