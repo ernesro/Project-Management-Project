@@ -4,7 +4,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 /**
@@ -28,6 +31,9 @@ public class WindowFXML extends Stage
         Scene scene = new Scene(root, width, height);
         Image icon = new Image(getClass().getResourceAsStream("/imgs/icono.png"));
         getIcons().add(icon);
+
+        root.setStyle("-fx-background-color: rgba(255, 165, 0, 0.2);");
+        initModality(Modality.APPLICATION_MODAL);
         setResizable(false);
         setScene(scene);
     }

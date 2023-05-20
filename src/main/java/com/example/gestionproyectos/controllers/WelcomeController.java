@@ -3,10 +3,13 @@ package com.example.gestionproyectos.controllers;
 import com.example.gestionproyectos.Application;
 import com.example.gestionproyectos.WindowFXML;
 import com.example.gestionproyectos.data.dataBase;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,7 +19,7 @@ import java.util.ResourceBundle;
  * @version 2.0
  * @Author Ernestas Urbonas
  */
-public class WelcomeController extends Application implements Initializable
+public class WelcomeController implements Initializable
 {
     /**
      * Method that initializes the window
@@ -27,6 +30,7 @@ public class WelcomeController extends Application implements Initializable
     private ImageView img;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         Image image = new Image(getClass().getResourceAsStream("/imgs/mainImage.jpeg"));
         img.setImage(image);
         img.setX(75);
