@@ -118,7 +118,7 @@ CREATE TABLE `employees`
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `employees` (`dni`, `name`, `lastName`, `phoneNumber`, `address`, `email`) VALUES 
-('Admin', 'Admin', '', '', '', ''),
+('Admin', 'Admin', '', '', '', 'Admin'),
 ('12345678A', 'John', 'Doe', '123456789', '123 Main St', 'admin@gmail.com'),
 ('87654321B', 'Jane', 'Doe', '987654321', '456 Elm St', 'janedoe@email.com'),
 ('11111111C', 'Alice', 'Smith', '111111111', '789 Oak St', 'alice.smith@email.com'),
